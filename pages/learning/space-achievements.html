@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Achievements - Solarscapes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Press Start 2P', serif;
+            font-weight: bold;
+            background-image: url(../../assets/img/bg.png);
+            background-repeat: repeat;
+            background-attachment: cover;
+            font-size: 15px;
+        }
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+        .progress {
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .carousel-item {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html"><img src="../../assets/img/Logo.png" alt="Logo" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"><b>Explore</b></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="astronomy-basics.html">Astronomy Basics</a></li>
+                            <li><a class="dropdown-item" href="space-history.html">Space History</a></li>
+                            <li><a class="dropdown-item" href="space-exploration.html">Space Exploration</a></li>
+                            <li><a class="dropdown-item" href="stars-galaxies.html">Stars and Galaxies</a></li>
+                            <li><a class="dropdown-item" href="space-achievements.html">Space Achievements</a></li>
+                            <li><a class="dropdown-item" href="technology-space.html">Technology and Space</a></li>
+                            <li><a class="dropdown-item" href="mathematics-astronomy.html">Mathematics in Astronomy</a></li>
+                            <li><a class="dropdown-item" href="famous-astronomers.html">Famous Astronomers</a></li>
+                            <li><a class="dropdown-item" href="constellations.html">Constellations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dashboardDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"><b>Dashboard</b></a>
+                        <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
+                            <li><a class="dropdown-item" href="../main/Profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="learning-modules.html">Learning Modules</a></li>
+                            <li><a class="dropdown-item" href="../main/QuizPage.html">Quizzes</a></li>
+                            <li><a class="dropdown-item" href="../main/Games.html">Games</a></li>
+                            <li><a class="dropdown-item" href="../tools/solar-system-virtual-tour.html">Virtual Tours</a></li>
+                            <li><a class="dropdown-item" href="../main/calendar.html">Astronomical Events</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center text-light mb-4">🚀 Space Achievements</h1>
+        
+        <div class="progress mb-5">
+            <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65/100</div>
+        </div>
+
+        <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- First Milestone -->
+                <div class="carousel-item active">
+                    <div class="card mt-5" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
+                        <div class="row m-3">
+                            <div class="col-md-3 m-3">
+                                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-3">
+                                    <h5 class="card-title">First Artificial Satellite (1957)</h5>
+                                    <p class="card-text">Sputnik 1 marked humanity's first step into space exploration. This Soviet satellite launched on October 4, 1957, opened the Space Age and revolutionized our understanding of space technology.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Milestone -->
+                <div class="carousel-item">
+                    <div class="card mt-5" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
+                        <div class="row m-3">
+                            <div class="col-md-3 m-3">
+                                <img src="https://images.unsplash.com/photo-1541961017774-22e08305d881?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-3">
+                                    <h5 class="card-title">Moon Landing (1969)</h5>
+                                    <p class="card-text">Apollo 11 successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon. This monumental achievement demonstrated human capability in space exploration and remains one of the greatest accomplishments in history.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Milestone -->
+                <div class="carousel-item">
+                    <div class="card mt-5" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
+                        <div class="row m-3">
+                            <div class="col-md-3 m-3">
+                                <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-3">
+                                    <h5 class="card-title">International Space Station (1998-Present)</h5>
+                                    <p class="card-text">The ISS represents humanity's continuous presence in space. Built through international cooperation, it serves as a laboratory for scientific research and stands as a symbol of peaceful space exploration and global collaboration.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth Milestone -->
+                <div class="carousel-item">
+                    <div class="card mt-5" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
+                        <div class="row m-3">
+                            <div class="col-md-3 m-3">
+                                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-3">
+                                    <h5 class="card-title">Hubble Space Telescope (1990-Present)</h5>
+                                    <p class="card-text">Launched in 1990, the Hubble Space Telescope has revolutionized our view of the universe. Its discoveries about deep space, distant galaxies, and the age of the universe have fundamentally changed our cosmological understanding.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <div class="text-center mt-5 mb-5">
+            <a href="../../index.html" class="btn btn-primary me-2"><i class="fas fa-home"></i> Home</a>
+            <a href="../main/QuizPage.html" class="btn btn-success"><i class="fas fa-book"></i> Take a Quiz</a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-light text-center p-4 mt-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../../index.html" class="text-light">Home</a></li>
+                        <li><a href="learning-modules.html" class="text-light">Learning</a></li>
+                        <li><a href="../main/QuizPage.html" class="text-light">Quizzes</a></li>
+                        <li><a href="../main/Games.html" class="text-light">Games</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Educational Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../tools/solar-system.html" class="text-light">Solar System</a></li>
+                        <li><a href="../tools/solar-system-animation.html" class="text-light">Animations</a></li>
+                        <li><a href="../tools/solar-system-model.html" class="text-light">3D Models</a></li>
+                        <li><a href="../tools/solar-system-virtual-tour.html" class="text-light">Virtual Tours</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <p>
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <p class="mb-0">;&copy; 2024 Solarscapes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Astronomers - Solarscapes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            font-family: 'Press Start 2P', serif;
+            background-image: url(../../assets/img/bg.png);
+            background-repeat: repeat;
+            font-size: 15px;
+        }
+        .card { background: transparent; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); color: #f5fffa; }
+        .logo { height: 50px; width: 50px; }
+        .bio-card { margin: 15px 0; padding: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html"><img src="../../assets/img/Logo.png" alt="Logo" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"><b>Explore</b></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="astronomy-basics.html">Astronomy Basics</a></li>
+                            <li><a class="dropdown-item" href="space-history.html">Space History</a></li>
+                            <li><a class="dropdown-item" href="space-exploration.html">Space Exploration</a></li>
+                            <li><a class="dropdown-item" href="stars-galaxies.html">Stars and Galaxies</a></li>
+                            <li><a class="dropdown-item" href="space-achievements.html">Space Achievements</a></li>
+                            <li><a class="dropdown-item" href="technology-space.html">Technology and Space</a></li>
+                            <li><a class="dropdown-item" href="mathematics-astronomy.html">Mathematics in Astronomy</a></li>
+                            <li><a class="dropdown-item" href="famous-astronomers.html">Famous Astronomers</a></li>
+                            <li><a class="dropdown-item" href="constellations.html">Constellations</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center text-light mb-4">⭐ Famous Astronomers</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card bio-card">
+                    <h5 class="card-title">Galileo Galilei (1564-1642)</h5>
+                    <img src="https://images.unsplash.com/photo-1603349206295-dde20617cb6a?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
+                    <p class="card-text">Pioneer of observational astronomy. Galileo revolutionized astronomy by using the telescope to observe Jupiter's moons, Venus phases, and sunspots. His work challenged geocentric models and supported heliocentrism.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card bio-card">
+                    <h5 class="card-title">Isaac Newton (1642-1727)</h5>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&h=300&auto=format&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
+                    <p class="card-text">Formulated the laws of motion and universal gravitation. Newton's theories provided the mathematical framework that explained planetary orbits and became the foundation of classical mechanics used in astronomy.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card bio-card">
+                    <h5 class="card-title">Edwin Hubble (1889-1953)</h5>
+                    <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?q=80&w=300&h=300&auto=format&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
+                    <p class="card-text">Discovered that galaxies exist beyond the Milky Way and that the universe is expanding. Hubble's findings revolutionized cosmology and demonstrated the vast scale of the universe far beyond what was previously believed.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card bio-card">
+                    <h5 class="card-title">Carl Sagan (1934-1996)</h5>
+                    <img src="https://images.unsplash.com/photo-1635070041078-e5b8cb665f1d?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
+                    <p class="card-text">Renowned astronomer, cosmologist, and science communicator. Sagan popularized astronomy and made complex concepts accessible. His Voyager Golden Record and public outreach inspired generations to study astronomy.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5 mb-5">
+            <a href="../../index.html" class="btn btn-primary me-2"><i class="fas fa-home"></i> Home</a>
+            <a href="../main/QuizPage.html" class="btn btn-success"><i class="fas fa-book"></i> Take a Quiz</a>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light text-center p-4 mt-5">
+        <div class="container">
+            <p>;&copy; 2024 Solarscapes. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

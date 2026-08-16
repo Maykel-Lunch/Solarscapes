@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Exploration: Solarscapes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <style>
+        body { font-family: 'Press Start 2P', serif; background-image: url(../../assets/img/bg.png); background-repeat: repeat; font-size: 15px; }
+        .card { background: transparent; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 4px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); color: #f5fffa; }
+        .logo { height: 50px; width: 50px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="../../assets/img/Logo.png" alt="Logo" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown"><b>Explore</b></a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="astronomy-basics.html">Astronomy Basics</a></li>
+                            <li><a class="dropdown-item" href="space-history.html">Space History</a></li>
+                            <li><a class="dropdown-item" href="space-exploration.html">Space Exploration</a></li>
+                            <li><a class="dropdown-item" href="#">Stars and Galaxies</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dashboardDropdown" data-bs-toggle="dropdown"><b>Dashboard</b></a>
+                        <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
+                            <li><a class="dropdown-item" href="../main/QuizPage.html">Quizzes</a></li>
+                            <li><a class="dropdown-item" href="../main/calendar.html">Events</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card-body m-3">
+            <h3 class="card-title text-center text-white">Space Exploration</h3>
+            <h6 class="card-text text-center text-white">Progress: 50/100</h6>
+            <div class="progress">
+                <div class="progress-bar" style="width: 50%;"></div>
+            </div>
+
+            <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="card mt-5">
+                            <div class="row m-3">
+                                <div class="col-md-3 m-3">
+                                    <img src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body m-3">
+                                        <h5 class="card-title">Robotic Missions</h5>
+                                        <p class="card-text">Unmanned spacecraft explore planets, moons, and asteroids, sending back invaluable data about our solar system and beyond.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card mt-5">
+                            <div class="row m-3">
+                                <div class="col-md-3 m-3">
+                                    <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80;&w=400;&h=400;&auto=format;&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body m-3">
+                                        <h5 class="card-title">Human Spaceflight</h5>
+                                        <p class="card-text">Astronauts conduct research in orbit and on celestial bodies, pushing the boundaries of human achievement.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card mt-5">
+                            <div class="row m-3">
+                                <div class="col-md-3 m-3">
+                                    <img src="https://images.unsplash.com/photo-1541961017774-22e08305d881?q=80;&w=400;&h=400;&auto=format;&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body m-3">
+                                        <h5 class="card-title">Future Missions</h5>
+                                        <p class="card-text">Exciting plans include Mars colonization, deep space exploration, and the search for life beyond Earth.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+            <div class="d-flex justify-content-between mt-5">
+                <a href="../../index.html" class="btn btn-outline-primary"><i class="fas fa-home"></i> Home</a>
+                <a href="../main/QuizPage.html" class="btn btn-primary">Take a Quiz</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light text-center p-3 mt-5">
+        <p>Follow us on: <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a></p>
+    </footer>
+</body>
+</html>
