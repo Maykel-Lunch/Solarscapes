@@ -1,5 +1,12 @@
 <!-- REUSABLE HEADER/NAVBAR COMPONENT -->
 <!-- Usage: Include this file in all learning pages for consistent navigation -->
+<!--
+  NOTE: dropdown toggles here use data-dropdown-toggle (custom attribute),
+  not data-bs-toggle="dropdown". The main page's inline script wires these
+  up with plain vanilla JS instead of relying on Bootstrap's Dropdown/Popper
+  JS, so this works no matter what else is going on with Bootstrap loading,
+  versions, or script order elsewhere on the page.
+-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="../../index.html"><img src="../../assets/img/Logo.png" alt="Logo" class="logo" style="height: 50px; width: 50px;"></a>
@@ -11,7 +18,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"><b>Explore</b></a>
+                        data-dropdown-toggle aria-expanded="false"><b>Explore</b></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="astronomy-basics.html">Astronomy Basics</a></li>
                         <li><a class="dropdown-item" href="space-history.html">Space History</a></li>
@@ -26,7 +33,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dashboardDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"><b>Dashboard</b></a>
+                        data-dropdown-toggle aria-expanded="false"><b>Dashboard</b></a>
                     <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
                         <li><a class="dropdown-item" href="../../pages/main/Profile.html">Profile</a></li>
                         <li><a class="dropdown-item" href="learning-modules.html">Learning Modules</a></li>
@@ -36,6 +43,16 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="../../index.html">About Us</a></li>
             </ul>
+            <form class="d-flex" action="#" method="">
+                <div class="input-group">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+
+            <a class="btn btn-primary m-2" href="#">Sign Up</a>
         </div>
     </div>
 </nav>
