@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <title>Quiz Page: Solarscapes</title>
+    <style>
+        body {
+            font-family: 'Press Start 2P', serif;
+            font-weight: bold;
+            background-image: url("assets/img/bg.png");
+            background-repeat: repeat;
+            background-attachment: cover;
+        }
+
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="assets/img/Logo.png" alt="Logo" class="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <b>Explore</b>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="Astronomy Basics.html">Astronomy Basics</a></li>
+                            <li><a class="dropdown-item" href="#">Space History</a></li>
+                            <li><a class="dropdown-item" href="#">Space Exploration</a></li>
+                            <li><a class="dropdown-item" href="#">Stars and Galaxies</a></li>
+                            <li><a class="dropdown-item" href="#">Space Achievements</a></li>
+                            <li><a class="dropdown-item" href="#">Technology and Space</a></li>
+                            <li><a class="dropdown-item" href="#">Mathematics in Astronomy</a></li>
+                            <li><a class="dropdown-item" href="#">Famous Astronomist</a></li>
+                            <li><a class="dropdown-item" href="#">Constellations</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <b>Dashboard</b>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="Profile.html">Profile</a></li>
+                            <li>
+                                <a class="dropdown-item" href="Learning Modules.html">Learning Modules</a>
+                            </li>
+                            <li><a class="dropdown-item" href="QuizPage.html">Quizzes</a></li>
+                            <li><a class="dropdown-item" href="Games.html">Games</a></li>
+                            <li><a class="dropdown-item" href="SolarSystemVitualTour.html">Virtual Tours</a></li>
+                            <li><a class="dropdown-item" href="calendar.html">Astronomical Events</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+
+                </ul>
+                <form class="d-flex" action="#" method="">
+                    <div class="input-group">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            aria-describedby="basic-addon1">
+                        <button class="btn btn-outline-secondary" type="submit" id="basic-addon1">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <a class="btn btn-primary m-2" href="#">Sign Up</a>
+            </div>
+        </div>
+    </nav> 
+
+    <div class="card mt-5 mx-5" id="q1">
+        <div class="row m-3">
+            <div class="col-md-3 m-3">
+                <img src="Astronomy Logo.png"
+                    style=" height: 220px; width: 220px;background-color: #fcf5e5; border-radius: 50%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">Astronomy Basics</h5>
+                    <p class="card-text">Question 1/5</p>
+                    <div class="form-floating">
+                        <select class="form-select" id="answer" aria-label="Floating label select example">
+                            <option selected>Choose your answer</option>
+                            <option value="1">Proxima Centauri</option>
+                            <option value="2">Betelgeuse</option>
+                            <option value="3">Sirius</option>
+                            <option value="4">Alpha Centauri</option>
+                        </select>
+                        <label for="floatingSelect">What is the name of the closest star to Earth?</label>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="checkAnswer">Check Answer</button>
+
+
+                    <button class=" btn btn-primary mt-3" id="nextQ" style="display: none;">Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 mx-5" id="q2" style="display: none;">
+        <div class="row m-3">
+            <div class="col-md-3 m-3">
+                <img src="Astronomy Logo.png"
+                    style=" height: 220px; width: 220px;background-color: #fcf5e5; border-radius: 50%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">Astronomy Basics</h5>
+                    <p class="card-text">Question 2/5</p>
+                    <div class="form-floating">
+                        <select class="form-select" id="answer2" aria-label="Floating label select example">
+                            <option selected>Choose your answer</option>
+                            <option value="1">Revolution around the sun</option>
+                            <option value="2">Axial tilt</option>
+                            <option value="3">Gravitational pull</option>
+                            <option value="4">Spin on its axis</option>
+                        </select>
+                        <label for="floatingSelect">How does the Earth's rotation contribute to the formation of day and
+                            night?</label></label>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="checkAnswer1">Check Answer</button>
+
+                    <button class="btn btn-primary mt-3" id="nextQ2" style="display: none;">Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 mx-5" id="q3" style="display: none;">
+        <div class="row m-3">
+            <div class="col-md-3 m-3">
+                <img src="Astronomy Logo.png"
+                    style=" height: 220px; width: 220px;background-color: #fcf5e5; border-radius: 50%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">Astronomy Basics</h5>
+                    <p class="card-text">Question 3/5</p>
+                    <div class="form-floating">
+                        <select class="form-select" id="answer3" aria-label="Floating label select example">
+                            <option selected>Choose your answer</option>
+                            <option value="1">Size </option>
+                            <option value="2">Prescence of moon</option>
+                            <option value="3">Orbiting the sun</option>
+                            <option value="4">Clearing its orbital path</option>
+                        </select>
+                        <label for="floatingSelect">What is the difference between a planet and a dwarf
+                            planet?</label></label>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="checkAnswer2">Check Answer</button>
+
+                    <button class="btn btn-primary mt-3" id="nextQ3" style="display: none;">Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 mx-5" id="q4" style="display: none;">
+        <div class="row m-3">
+            <div class="col-md-3 m-3">
+                <img src="Astronomy Logo.png"
+                    style=" height: 220px; width: 220px;background-color: #fcf5e5; border-radius: 50%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">Astronomy Basics</h5>
+                    <p class="card-text">Question 4/5</p>
+                    <div class="form-floating">
+                        <select class="form-select" id="answer4" aria-label="Floating label select example">
+                            <option selected>Choose your answer</option>
+                            <option value="1">Studying earth's climate </option>
+                            <option value="2">Tracking asteroids</option>
+                            <option value="3">Mapping ocean currents</option>
+                            <option value="4">Observing distant galaxy</option>
+                        </select>
+                        <label for="floatingSelect">What is the significance of the Hubble Space Telescope in
+                            astronomy?</label></label>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="checkAnswer3">Check Answer</button>
+
+                    <button class="btn btn-primary mt-3" id="nextQ4" style="display: none;">Next</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 mx-5" id="q5" style="display: none;">
+        <div class="row m-3">
+            <div class="col-md-3 m-3">
+                <img src="Astronomy Logo.png"
+                    style=" height: 220px; width: 220px;background-color: #fcf5e5; border-radius: 50%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">Astronomy Basics</h5>
+                    <p class="card-text">Question 5/5</p>
+                    <div class="form-floating">
+                        <select class="form-select" id="answer5" aria-label="Floating label select example">
+                            <option selected>Choose your answer</option>
+                            <option value="1">Solar wind</option>
+                            <option value="2">Ionization of its nucleus</option>
+                            <option value="3">Collision with asteroids</option>
+                            <option value="4">Interaction with cosmic rays</option>
+                        </select>
+                        <label for="floatingSelect">What causes a comet to develop a glowing tail when approaching the
+                            Sun?</label></label>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="checkAnswer4">Check Answer</button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary mt-3" id="congrats" style="display: none;">Finish</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 mx-5" id="Finish" style="display: none;">
+        <div class="row m-3">
+            <div class="col-md-3 m-3" style="background: linear-gradient(#ff8473, #fff9d2);;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body m-3">
+                    <h5 class="card-title">Astronomy Basics</h5>
+                    <h6>Your Score: <span id="Congrats"></span> / 5</h6>
+                    <div class="d-flex justify-content-center">
+                        <img src="https://i.gifer.com/origin/89/8958b6bbe4b087c03e72869322c91f68_w200.gif">
+                    </div>
+                    <div class="d-flex justify-content-between">
+
+                        <button class="btn btn-primary mt-3" id="home"><i class="fa fa-home"></i>Home</button>
+                        <button class="btn btn-secondary mt-3" id="review">Review</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Result Container -->
+    <div class="result m-3" style="display: none; border-radius: 20%;">
+        <div class="alert" id="resultMessage"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-light text-center mt-5">
+        <div class="container-fluid">
+            <p>Follow us on:</p>
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+    
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var count = 0;
+        $("#checkAnswer").click(function (event) {
+            event.preventDefault();
+            const selectedAnswer = $("#answer").val();
+
+            if (selectedAnswer === "1") {
+                $("#resultMessage").text("Correct! Proxima Centauri is the nearest star in our solar system");
+                $("#resultMessage").addClass("alert-success");
+                count++;
+
+            } else {
+                $("#resultMessage").text("Wrong Answer. Try again.");
+                $("#resultMessage").addClass("alert-danger");
+            }
+
+            $("#nextQ").show();
+            $("#checkAnswer").hide();
+            $(".result").show();
+        });
+
+        $("#nextQ").click(function (event) {
+            event.preventDefault();
+            $("#q2").show();
+            $("#q1").hide();
+            $(".result").hide();
+        });
+
+        $("#checkAnswer1").click(function (event) {
+            event.preventDefault();
+            const selectedAnswer = $("#answer2").val();
+
+            if (selectedAnswer === "4") {
+                $("#resultMessage").text("Correct!");
+                $("#resultMessage").addClass("alert-success");
+                count++;
+
+            } else {
+                $("#resultMessage").text("Wrong Answer. Try again.");
+                $("#resultMessage").addClass("alert-danger");
+            }
+
+            $("#nextQ2").show();
+            $("#checkAnswer1").hide();
+            $(".result").show();
+        });
+
+        //3
+        $("#nextQ2").click(function (event) {
+            event.preventDefault();
+            $("#q3").show();
+            $("#q2").hide();
+            $(".result").hide();
+        });
+
+        $("#checkAnswer2").click(function (event) {
+            event.preventDefault();
+            const selectedAnswer = $("#answer3").val();
+
+            if (selectedAnswer === "4") {
+                $("#resultMessage").text("Correct!");
+                $("#resultMessage").addClass("alert-success");
+                count++;
+
+            } else {
+                $("#resultMessage").text("Wrong Answer. Try again.");
+                $("#resultMessage").addClass("alert-danger");
+            }
+
+            $("#nextQ3").show();
+            $("#checkAnswer2").hide();
+            $(".result").show();
+        });
+
+        $("#nextQ3").click(function (event) {
+            event.preventDefault();
+            $("#q4").show();
+            $("#q3").hide();
+            $(".result").hide();
+        });
+
+        $("#checkAnswer3").click(function (event) {
+            event.preventDefault();
+            const selectedAnswer = $("#answer4").val();
+
+            if (selectedAnswer === "4") {
+                $("#resultMessage").text("Correct!");
+                $("#resultMessage").addClass("alert-success");
+                count++;
+
+            } else {
+                $("#resultMessage").text("Wrong Answer. Try again.");
+                $("#resultMessage").addClass("alert-danger");
+            }
+
+            $("#nextQ4").show();
+            $("#checkAnswer3").hide();
+            $(".result").show();
+        });
+
+        $("#nextQ4").click(function (event) {
+            event.preventDefault();
+            $("#q5").show();
+            $("#q4").hide();
+            $(".result").hide();
+        });
+
+        $("#checkAnswer4").click(function (event) {
+            event.preventDefault();
+            const selectedAnswer = $("#answer5").val();
+
+            if (selectedAnswer === "2") {
+                $("#resultMessage").text("Correct!");
+                $("#resultMessage").addClass("alert-success");
+                count++;
+
+            } else {
+                $("#resultMessage").text("Wrong Answer. Try again.");
+                $("#resultMessage").addClass("alert-danger");
+            }
+
+            $("#congrats").show();
+            $("#checkAnswer4").hide();
+            $(".result").show();
+        });
+
+        $("#congrats").click(function (event) {
+            event.preventDefault();
+            $("#Finish").show();
+            $("#q5").hide();
+            $(".result").hide();
+
+            $("#Congrats").text(count);
+        });
+
+        $("#home").click(function (event) {
+            event.preventDefault();
+            window.location.href = "index.html";
+        });
+
+
+    });
+</script>
+
+</html>

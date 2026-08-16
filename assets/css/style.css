@@ -1,0 +1,137 @@
+body {
+  background-image: url(../img/bg.png);
+  background-repeat: repeat;
+  background-attachment: cover;
+}
+
+.card {
+  background: transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  color: #f5fffa;
+}
+
+
+.navbar {
+  background-color: rgb(99, 99, 245);
+}
+
+.navbar-brand-logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.navbar-nav li a {
+  font-size: 16px;
+}
+
+.navbar-nav li.nav-item {
+  margin-right: 20px;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  margin-left: 30px;
+}
+
+
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f2f2f2;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navigation Styles */
+nav {
+  background-color: #1C2951;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
+
+nav a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #555;
+}
+
+/* Main Content Styles */
+main {
+  padding: 20px;
+}
+
+.content-section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  nav li {
+    width: 100%;
+    float: none;
+  }
+}
+
+/* Additional Navbar Styles */
+.navbar-brand-logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  margin-left: 30px;
+  color: white;
+}
+
+.navbar-nav li.nav-item {
+  margin-right: 30px;
+}
+
+.navbar-nav li.nav-item a.nav-link {
+  color: white;
+}
+
+

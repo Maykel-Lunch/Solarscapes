@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Solar System Model</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-image: url("bg.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    canvas {
+      display: block;
+    }
+    .planet-info {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="solarSystem"></canvas>
+  <div class="planet-info" id="planetInfo"></div>
+  <script>
+    const canvas = document.getElementById('solarSystem');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const sun = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      radius: 50,
+      color: 'yellow'
+    };
+
+    const planets = [
+      { name: 'Mercury', distance: 100, radius: 8, color: 'gray', speed: 2, angle: 0 },
+      { name: 'Venus', distance: 150, radius: 8, color: 'orange', speed: 1.5, angle: 0 },
+      { name: 'Earth', distance: 200, radius: 8, color: 'blue', speed: 1, angle: 0 },
+      { name: 'Mars', distance: 250, radius: 8, color: 'red', speed: 0.8, angle: 0 },
+      { name: 'Jupiter', distance: 350, radius: 8, color: 'brown', speed: 0.5, angle: 0 },
+      { name: 'Saturn', distance: 450, radius: 8, color: 'goldenrod', speed: 0.4, angle: 0 },
+      { name: 'Uranus', distance: 550, radius: 8, color: 'lightblue', speed: 0.3, angle: 0 },
+      { name: 'Neptune', distance: 650, radius: 8, color: 'blue', speed: 0.25, angle: 0 },
+      { name: 'Pluto', distance: 750, radius: 8, color: 'lightgray', speed: 0.2, angle: 0 }
+      // You can add more planets or celestial bodies here
+    ];
+
+    const planetInfo = document.getElementById('planetInfo');
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw orbits
+      planets.forEach(planet => {
+        ctx.beginPath();
+        ctx.arc(sun.x, sun.y, planet.distance, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)'; // Orbit color (white with transparency)
+        ctx.stroke();
+      });
+
+      // Draw sun
+      ctx.beginPath();
+      ctx.arc(sun.x, sun.y, sun.radius, 0, Math.PI * 2);
+      ctx.fillStyle = sun.color;
+      ctx.fill();
+
+      // Draw planets
+      planets.forEach(planet => {
+        const posX = sun.x + planet.distance * Math.cos(planet.angle);
+        const posY = sun.y + planet.distance * Math.sin(planet.angle);
+
+        ctx.beginPath();
+        ctx.arc(posX, posY, planet.radius, 0, Math.PI * 2);
+        ctx.fillStyle = planet.color;
+        ctx.fill();
+
+        // Check if mouse is over the planet
+        canvas.addEventListener('mousemove', e => {
+          const rect = canvas.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          if (
+            mouseX >= posX - planet.radius &&
+            mouseX <= posX + planet.radius &&
+            mouseY >= posY - planet.radius &&
+            mouseY <= posY + planet.radius
+          ) {
+            planetInfo.textContent = `Planet: ${planet.name}`;
+          }
+        });
+
+        // Update planet angle for next frame
+        planet.angle += (Math.PI / 180) * planet.speed;
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+</body>
+</html>
