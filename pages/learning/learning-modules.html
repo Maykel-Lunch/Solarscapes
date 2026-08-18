@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            font-family: 'Press Start 2P', serif;
+            font-weight: bold;
+            background-image: url("../../assets/img/bg.png");
+            background-repeat: repeat;
+            background-attachment: cover;
+        }
+
+        /* ----- NAVBAR STACKING FIX ----- */
+        #navbar-placeholder {
+            position: relative;
+            z-index: 1050;
+        }
+        #navbar-placeholder .navbar,
+        #navbar-placeholder .navbar-collapse,
+        #navbar-placeholder .nav-item.dropdown {
+            overflow: visible;
+        }
+        #navbar-placeholder .dropdown-menu {
+            z-index: 1051;
+        }
+        #navbar-placeholder .dropdown-menu.show {
+            display: flex !important;
+            flex-direction: column !important;
+            min-width: 12rem !important;
+        }
+        #navbar-placeholder .dropdown-menu.show > li {
+            display: block !important;
+            width: 100% !important;
+        }
+        #navbar-placeholder .dropdown-menu.show > li > .dropdown-item {
+            display: block !important;
+            width: 100% !important;
+        }
+        /* -------------------------------- */
+
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <!-- The navbar will be loaded dynamically from includes/header.html -->
+    <div id="navbar-placeholder"></div>
+
+    <div class="container mt-5">
+
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Astronomy Basics</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure
+                            through Astronomy Basics, where we'll break down the secrets of stars, planets, and
+                            galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive
+                            into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="astronomy-basics.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Space History</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure
+                            through Astronomy Basics, where we'll break down the secrets of stars, planets, and
+                            galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive
+                            into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="space-history.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Space Exploration</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure
+                            through Astronomy Basics, where we'll break down the secrets of stars, planets, and
+                            galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive
+                            into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="space-exploration.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Stars and Galaxies</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure
+                            through Astronomy Basics, where we'll break down the secrets of stars, planets, and
+                            galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive
+                            into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="stars-galaxies.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Space Achievements</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure through Astronomy Basics, where we'll break down the secrets of stars, planets, and galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="space-achievements.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Technology and Space</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure through Astronomy Basics, where we'll break down the secrets of stars, planets, and galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="technology-space.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Mathematics in Space</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure through Astronomy Basics, where we'll break down the secrets of stars, planets, and galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="mathematics-astronomy.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Famous Astronomist</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure through Astronomy Basics, where we'll break down the secrets of stars, planets, and galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="famous-astronomers.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card mt-5 mx-5">
+            <div class="row m-3">
+                <div class="col-md-3 m-3">
+                    <img src="../../assets/img/Astronomy Logo.png" class="img-fluid rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-3">
+                        <h5 class="card-title">Constellations</h5>
+                        <p class="card-text"> Ready to unravel the mysteries of the universe? Join us on an adventure through Astronomy Basics, where we'll break down the secrets of stars, planets, and galaxies. Whether you're a budding astronomer or just curious about the cosmos, let's dive into the celestial wonders together!</p>
+    
+                        <div class="d-flex justify-content-start">
+                            <a href="constellations.html" class="btn btn-primary me-2">
+                                <h5>Start Learning</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-light text-center p-3 mt-5">
+        <div class="container">
+            <p>Follow us on:</p>
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+
+    <!-- Load jQuery and load the header -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        function initDropdowns(root) {
+            const toggles = root.querySelectorAll('.nav-item.dropdown > .dropdown-toggle');
+
+            function closeAll(except) {
+                root.querySelectorAll('.dropdown-menu.show').forEach(function (menu) {
+                    if (menu === except) return;
+                    menu.classList.remove('show');
+                    const t = menu.previousElementSibling;
+                    if (t) t.setAttribute('aria-expanded', 'false');
+                });
+            }
+
+            toggles.forEach(function (toggle) {
+                const menu = toggle.nextElementSibling;
+                if (!menu || !menu.classList.contains('dropdown-menu')) return;
+
+                menu.style.position = 'fixed';
+                menu.style.margin = '0';
+                menu.style.zIndex = '99999';
+
+                function positionMenu() {
+                    const rect = toggle.getBoundingClientRect();
+                    menu.style.top = rect.bottom + 'px';
+                    menu.style.left = rect.left + 'px';
+                }
+
+                toggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isOpen = menu.classList.contains('show');
+                    closeAll(isOpen ? null : menu);
+                    if (!isOpen) positionMenu();
+                    menu.classList.toggle('show', !isOpen);
+                    toggle.setAttribute('aria-expanded', String(!isOpen));
+                });
+
+                window.addEventListener('resize', function () {
+                    if (menu.classList.contains('show')) positionMenu();
+                });
+                window.addEventListener('scroll', function () {
+                    if (menu.classList.contains('show')) positionMenu();
+                }, true);
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!root.contains(e.target)) closeAll();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeAll();
+            });
+        }
+
+        $(document).ready(function() {
+            const placeholder = document.getElementById('navbar-placeholder');
+
+            $("#navbar-placeholder").load("../../includes/header.html", function(response, status, xhr) {
+                if (status == "error") {
+                    console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
+                    $("#navbar-placeholder").html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
+                    return;
+                }
+
+                initDropdowns(placeholder);
+            });
+        });
+    </script>
+</body>
+
+</html>
