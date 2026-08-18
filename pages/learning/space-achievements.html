@@ -163,11 +163,7 @@
     </div>
 
     <!-- Footer Section -->
-    <footer class="bg-dark text-light text-center p-4 mt-5">
-        <div class="container">
-            <p class="mb-0">&copy; 2024 Solarscapes. All rights reserved.</p>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <!-- Load jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -258,6 +254,13 @@
                 }
 
                 initDropdowns(placeholder);
+            });
+
+            $("#footer-placeholder").load("../../includes/footer.html", function(response, status, xhr) {
+                if (status == "error") {
+                    console.log("Error loading footer: " + xhr.status + " " + xhr.statusText);
+                    $("#footer-placeholder").html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+                }
             });
         });
     </script>

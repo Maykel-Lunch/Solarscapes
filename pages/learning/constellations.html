@@ -122,7 +122,7 @@
     <div id="navbar-placeholder"></div>
 
     <div class="container mt-5">
-        <h1 class="text-center text-light mb-4">✨ Constellations of the Night Sky</h1>
+        <h1 class="text-center text-light mb-4">Constellations of the Night Sky</h1>
 
         <!-- Carousel with constellation cards -->
         <div id="constellationCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -352,11 +352,8 @@
         </div>
     </div>
 
-    <footer class="bg-dark text-light text-center p-4 mt-5">
-        <div class="container">
-            <p>&copy; 2024 Solarscapes. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- Footer Section -->
+    <div id="footer-placeholder"></div>
 
     <!-- Load jQuery and load the header -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -424,6 +421,13 @@
                     return;
                 }
                 initDropdowns(placeholder);
+            });
+
+            $("#footer-placeholder").load("../../includes/footer.html", function(response, status, xhr) {
+                if (status == "error") {
+                    console.log("Error loading footer: " + xhr.status + " " + xhr.statusText);
+                    $("#footer-placeholder").html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+                }
             });
         });
     </script>

@@ -422,16 +422,8 @@
 
     </div> <!-- container -->
 
-    <!-- Footer (original style) -->
-    <footer class="bg-dark text-light text-center p-3 mt-5">
-        <div class="container">
-            <p>Follow us on:</p>
-            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-    </footer>
+    <!-- Footer Section -->
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts (unchanged) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -501,6 +493,13 @@
                     return;
                 }
                 initDropdowns(placeholder);
+            });
+
+            $("#footer-placeholder").load("../../includes/footer.html", function(response, status, xhr) {
+                if (status == "error") {
+                    console.log("Error loading footer: " + xhr.status + " " + xhr.statusText);
+                    $("#footer-placeholder").html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+                }
             });
         });
     </script>
