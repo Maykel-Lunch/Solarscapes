@@ -5,11 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astronomy Basics: Solarscapes</title>
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
     <style>
@@ -47,7 +44,6 @@
             display: block !important;
             width: 100% !important;
         }
-        /* -------------------------------- */
 
         .card {
             background: transparent;
@@ -57,7 +53,7 @@
             color: #f5fffa;
         }
 
-        .container-fluid{
+        .container-fluid {
             padding: 0 100px 0 100px;
         }
 
@@ -65,107 +61,187 @@
             height: 50px;
             width: 50px;
         }
+
+        /* SVG icon style */
+        .topic-icon {
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.3));
+            transition: 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        .topic-icon:hover {
+            filter: drop-shadow(0 0 25px #8fcbff);
+            transform: scale(1.02);
+        }
+        @media (max-width: 768px) {
+            .topic-icon {
+                width: 120px;
+                height: 120px;
+            }
+            .container-fluid {
+                padding: 0 20px;
+            }
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 20px;
+        }
+        .progress-bar {
+            background-color: #4ab3ff;
+        }
+        .btn-outline-primary {
+            color: #b3e4ff;
+            border-color: #4ab3ff;
+        }
+        .btn-outline-primary:hover {
+            background: #1a4a7a;
+            border-color: #8fcbff;
+        }
+        .btn-primary {
+            background: #0d6efd;
+            border: 1px solid #0d6efd;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+        }
+        footer.bg-dark {
+            background-color: #212529 !important;
+        }
+        footer a {
+            color: #f8f9fa;
+        }
+        footer a:hover {
+            color: #adb5bd;
+        }
+        .card-title {
+            text-shadow: 0 0 8px rgba(0, 180, 255, 0.4);
+        }
     </style>
 </head>
 
 <body>
 
     <!-- Navigation Bar -->
-    <!-- The navbar will be loaded dynamically from includes/header.html -->
     <div id="navbar-placeholder"></div>
 
     <div class="container mt-5">
         <div class="card-body m-3">
             <h3 class="card-title text-center text-white">Astronomy Basics</h3>
-            <h6 class="card-text text-center text-white">Progress: <span id="Congrats"></span> 50/100</h6>
 
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-            </div>
 
-            
-
-            <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div id="cardCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
                 <div class="carousel-inner">
+
+                    <!-- Item 1: Asteroids (SVG) -->
                     <div class="carousel-item active">
-                        <div class="card mt-5"
-                            style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
-                            <div class="row m-3">
-                                <div class="col-md-3 m-3">
-                                    <img src="https://imagecache.jpl.nasa.gov/images/edu/news/psyche-640x350.gif"
-                                        style="height: 220px; width: 220px;">
+                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="row m-3 align-items-center">
+                                <div class="col-md-3 text-center my-2">
+                                    <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="42" stroke="#b0d0f0" stroke-width="2" fill="#0f1f2f" />
+                                        <circle cx="30" cy="30" r="10" fill="#8a9baa" stroke="#c0d8e8" stroke-width="1.5" />
+                                        <circle cx="70" cy="40" r="8" fill="#7a8b9a" stroke="#c0d8e8" stroke-width="1.5" />
+                                        <circle cx="45" cy="70" r="7" fill="#9aabb8" stroke="#c0d8e8" stroke-width="1.5" />
+                                        <circle cx="68" cy="72" r="6" fill="#8a9baa" stroke="#c0d8e8" stroke-width="1.5" />
+                                        <circle cx="22" cy="58" r="5" fill="#7a8b9a" stroke="#c0d8e8" stroke-width="1.5" />
+                                        <path d="M50 12 L50 6 M50 94 L50 88 M12 50 L6 50 M94 50 L88 50" stroke="#b0d0f0" stroke-width="2" />
+                                    </svg>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body m-3">
+                                    <div class="card-body m-1 m-md-3">
                                         <h5 class="card-title">Asteroids</h5>
-                                        <p class="card-text">Asteroids are small, rocky objects that orbit the Sun,
-                                            primarily found in the asteroid belt between Mars and Jupiter. Sometimes
-                                            called minor planets, they are rocky, airless remnants left over from the
-                                            early formation of our solar system about 4.6 billion years ago.</p>
+                                        <p class="card-text">Asteroids are small, rocky objects that orbit the Sun, primarily found in the asteroid belt between Mars and Jupiter. Sometimes called minor planets, they are rocky, airless remnants left over from the early formation of our solar system about 4.6 billion years ago.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Item 2: Comets (SVG) -->
                     <div class="carousel-item">
-                        <div class="card mt-5"
-                            style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
-                            <div class="row m-3">
-                                <div class="col-md-3 m-3">
-                                    <img src="https://imagecache.jpl.nasa.gov/images/edu/news/psyche-640x350.gif"
-                                        style="height: 220px; width: 220px;">
+                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="row m-3 align-items-center">
+                                <div class="col-md-3 text-center my-2">
+                                    <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="46" cy="48" r="18" fill="#2a4a6a" stroke="#b0d8ff" stroke-width="2" />
+                                        <ellipse cx="46" cy="48" rx="12" ry="10" fill="#d4e8ff" opacity="0.6" />
+                                        <path d="M60 42 L90 30 L82 44 L96 52 L78 54 L88 68 L66 58 L60 42" fill="#b8d8ff" opacity="0.7" />
+                                        <circle cx="46" cy="48" r="5" fill="#ffecb3" />
+                                        <path d="M36 36 L28 28 M36 60 L28 68 M56 36 L64 28 M56 60 L64 68" stroke="#b0d0f0" stroke-width="2" />
+                                    </svg>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body m-3">
+                                    <div class="card-body m-1 m-md-3">
                                         <h5 class="card-title">Comets</h5>
-                                        <p class="card-text">Comets are frozen leftovers from the formation of the solar
-                                            system, composed of dust, rock, and ices that orbit the Sun.</p>
+                                        <p class="card-text">Comets are frozen leftovers from the formation of the solar system, composed of dust, rock, and ices that orbit the Sun. When they approach the Sun, they heat up and release gases, forming a glowing coma and sometimes a tail.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Item 3: Planets (SVG) -->
                     <div class="carousel-item">
-                        <div class="card mt-5"
-                            style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255 , 255, 0.2); backdrop-filter: blur(20px);">
-                            <div class="row m-3">
-                                <div class="col-md-3 m-3">
-                                    <img src="https://imagecache.jpl.nasa.gov/images/edu/news/psyche-640x350.gif"
-                                        style="height: 220px; width: 220px;">
+                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="row m-3 align-items-center">
+                                <div class="col-md-3 text-center my-2">
+                                    <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="30" fill="#1f3a4b" stroke="#b0d0f0" stroke-width="2" />
+                                        <circle cx="50" cy="50" r="16" fill="#c67b3d" />
+                                        <circle cx="42" cy="42" r="4" fill="#e8c99b" />
+                                        <circle cx="58" cy="44" r="3" fill="#e8c99b" />
+                                        <circle cx="50" cy="58" r="4" fill="#e8c99b" />
+                                        <circle cx="34" cy="58" r="3" fill="#e8c99b" />
+                                        <circle cx="66" cy="54" r="3" fill="#e8c99b" />
+                                        <path d="M18 28 L12 22 M82 28 L88 22 M18 72 L12 78 M82 72 L88 78" stroke="#b0d0f0" stroke-width="2" />
+                                    </svg>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body m-3">
+                                    <div class="card-body m-1 m-md-3">
                                         <h5 class="card-title">Planets</h5>
-                                        <p class="card-text">Planets are celestial bodies that orbit stars, with our
-                                            solar system's Sun being the primary star. These objects are characterized
-                                            by their gravitational influence and the ability to reflect sunlight.</p>
+                                        <p class="card-text">Planets are celestial bodies that orbit stars, with our solar system's Sun being the primary star. These objects are characterized by their gravitational influence and the ability to reflect sunlight. They come in diverse sizes and compositions.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Item 4: Satellites and Moons (SVG) -->
                     <div class="carousel-item">
-                        <div class="card mt-5"
-                            style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px);">
-                            <div class="row m-3">
-                                <div class="col-md-3 m-3">
-                                    <img src="https://imagecache.jpl.nasa.gov/images/edu/news/psyche-640x350.gif"
-                                        style="height: 220px; width: 220px;">
+                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="row m-3 align-items-center">
+                                <div class="col-md-3 text-center my-2">
+                                    <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="50" cy="50" r="36" fill="#0b1f33" stroke="#b0d0f0" stroke-width="2" />
+                                        <circle cx="50" cy="50" r="18" fill="#a0b8d0" />
+                                        <circle cx="50" cy="50" r="8" fill="#d0e0f0" />
+                                        <rect x="44" y="22" width="12" height="8" fill="#a0b8d0" rx="2" />
+                                        <rect x="44" y="70" width="12" height="8" fill="#a0b8d0" rx="2" />
+                                        <rect x="22" y="46" width="8" height="12" fill="#a0b8d0" rx="2" />
+                                        <rect x="70" y="46" width="8" height="12" fill="#a0b8d0" rx="2" />
+                                        <circle cx="28" cy="28" r="4" fill="#b0d0f0" />
+                                        <circle cx="72" cy="28" r="4" fill="#b0d0f0" />
+                                        <circle cx="28" cy="72" r="4" fill="#b0d0f0" />
+                                        <circle cx="72" cy="72" r="4" fill="#b0d0f0" />
+                                    </svg>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body m-3">
+                                    <div class="card-body m-1 m-md-3">
                                         <h5 class="card-title">Satellites and Moons</h5>
-                                        <p class="card-text">An artificial body placed in orbit around the Earth, Moon,
-                                            or another planet in order to collect information or for communication.</p>
+                                        <p class="card-text">An artificial body placed in orbit around the Earth, Moon, or another planet in order to collect information or for communication. Natural satellites, like our Moon, also orbit planets and provide valuable scientific data.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                </div> <!-- carousel-inner -->
+
+                <!-- Carousel controls -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -174,20 +250,20 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-            </div>
+            </div> <!-- carousel -->
 
+            <!-- bottom gif and buttons (kept as original) -->
             <div class="d-flex justify-content-center mt-5">
                 <img src="https://cdna.artstation.com/p/assets/images/images/050/392/912/original/nelson-tiapa-gif-con-telefono.gif?1654734490"
-                    style="width: 200px;">
+                    style="width: 200px;" alt="space gif">
             </div>
             <div class="d-flex justify-content-between">
                 <a href="../../index.html" class="btn btn-outline-primary mt-3"><i class="fa fa-home"></i> Home</a>
                 <a href="../main/QuizPage.html" class="btn btn-primary mt-3">Take a Quiz</a>
             </div>
 
-            
-        </div>
-    </div>
+        </div> <!-- card-body -->
+    </div> <!-- container -->
 
     <!-- Footer Section -->
     <footer class="bg-dark text-light text-center p-3 mt-5">
@@ -258,16 +334,12 @@
 
         $(document).ready(function() {
             const placeholder = document.getElementById('navbar-placeholder');
-
-            // Load the header from the includes folder
             $("#navbar-placeholder").load("../../includes/header.html", function(response, status, xhr) {
                 if (status == "error") {
                     console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
-                    // Fallback: show a message if header fails to load
                     $("#navbar-placeholder").html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
                     return;
                 }
-
                 initDropdowns(placeholder);
             });
         });

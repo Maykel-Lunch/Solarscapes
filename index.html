@@ -76,6 +76,28 @@
     #carouselExampleIndicators2 .carousel-item {
         height: 100%; 
     }
+
+    /* ----- PIXEL SATURN SVG & ANIMATION ----- */
+    .saturn-wrap {
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+    }
+    .saturn-svg {
+        width: 160px;
+        height: 160px;
+        overflow: visible;
+        /* Enforces sharp pixel rendering without blurring */
+        shape-rendering: crispEdges; 
+        image-rendering: pixelated;
+        /* Replaced 360 spin with a retro floating animation */
+        animation: float-saturn 4s ease-in-out infinite;
+    }
+
+    @keyframes float-saturn {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
 </style>
 </head>
 
@@ -90,11 +112,47 @@
     <div class="container mt-5">
         <div class="card text-center">
             <div class="card-body">
-                <img src="assets/img/saturn.png" alt="Space" class="img-fluid m-2">
-                <h5 class="card-title">Welcome to Solarscapes</h5>
-                <p class="card-text">Your Gateway to the Cosmos!</p>
+                <div class="saturn-wrap m-2">
+                    <svg class="saturn-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pixel Saturn">
+                    <!-- Background Stars (Unrotated) -->
+                    <path d="M2 3h1v1H2z M20 4h1v1H20z M4 20h1v1H4z M21 19h1v1H21z" fill="#ffffff" opacity="0.5"/>
+                    
+                    <!-- Saturn Group (Rotated -20 degrees for a perfect tilt) -->
+                    <g transform="rotate(-20 12 12)">
+                        
+                        <!-- LAYER 1: BACK RING (Goes behind the planet) -->
+                        <path d="M4 11h2v1H4z M18 11h2v1H18z M2 12h3v1H2z M19 12h3v1H19z M1 13h3v1H1z M20 13h3v1H20z" fill="#d2b48c"/>
+
+                        <!-- LAYER 2: PLANET BASE -->
+                        <path d="M9 5h6v1H9z M7 6h10v1H7z M6 7h12v1H6z M5 8h14v8H5z M6 16h12v1H6z M7 17h10v1H7z M9 18h6v1H9z" fill="#e8b06a"/>
+
+                        <!-- LAYER 3: PLANET STRIPES & TEXTURE -->
+                        <!-- Light Stripes -->
+                        <path d="M8 6h8v1H8z M6 7h12v1H6z M5 8h14v1H5z" fill="#ffe8b8"/> 
+                        <!-- Dark Stripes -->
+                        <path d="M5 11h14v2H5z M5 14h14v1H5z" fill="#a86f36"/> 
+
+                        <!-- LAYER 4: PLANET SHADOWS -->
+                        <!-- Bottom of the sphere shadow -->
+                        <path d="M7 17h10v1H7z M9 18h6v1H9z" fill="#5a3b1c"/> 
+                        <!-- Drop shadow cast by the front ring onto the planet -->
+                        <path d="M5 13h14v1H5z M5 14h2v1H5z M17 14h2v1H17z" fill="#5a3b1c" opacity="0.5"/> 
+
+                        <!-- LAYER 5: FRONT RING (Overlaps the planet) -->
+                        <!-- Main body of the front ring -->
+                        <path d="M1 14h4v1H1z M19 14h4v1H19z M2 15h20v1H2z M4 16h16v1H4z" fill="#f5deb3"/>
+
+                        <!-- LAYER 6: FRONT RING HIGHLIGHTS & RIM SHADOWS -->
+                        <!-- Top shine -->
+                        <path d="M3 15h18v1H3z M2 14h2v1H2z M20 14h2v1H20z" fill="#ffffff" opacity="0.3"/> 
+                        <!-- Bottom dark rim -->
+                        <path d="M5 16h14v1H5z" fill="#c2a077"/> 
+                        
+                    </g>
+                </svg>
+                </div>
+                <h5 class="card-title mb-2">Welcome to Solarscapes</h5>
                 <a href="pages/learning/learning-modules.html" class="btn btn-primary">Start Journey</a>
-                <a href="#" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
     </div>
@@ -110,10 +168,10 @@
                 <a class="text-light me-4" href="#">View More Courses</a>
                 <button type="button" class="btn btn-primary mb-3" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
                     <i class="fas fa-chevron-left"></i>
-                </a>
+                </button>
                 <button type="button" class="btn btn-primary mb-3" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
                     <i class="fas fa-chevron-right"></i>
-                </a>
+                </button>
             </div>
             <div class="col-12">
                 <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
@@ -206,49 +264,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="carousel-item">
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <img class="img-fluid" alt="Mathematics in Space"
-                                        src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Mathematics in Space</h4>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#" class="btn btn-primary me-2">Start Learning</a>
-                                            <a href="#" class="btn btn-light text-dark">View More Info</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <img class="img-fluid" alt="Famous Astronomist"
-                                        src="https://images.unsplash.com/photo-1603349206295-dde20617cb6a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Famous Astronomist</h4>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#" class="btn btn-primary me-2">Start Learning</a>
-                                            <a href="#" class="btn btn-light text-dark">View More Info</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <img class="img-fluid" alt="Constellations"
-                                        src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=1826&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Constellations</h4>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="#" class="btn btn-primary me-2">Start Learning</a>
-                                            <a href="#" class="btn btn-light text-dark">View More Info</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 
             </div>

@@ -12,6 +12,7 @@
             font-family: 'Press Start 2P', serif;
             background-image: url(../../assets/img/bg.png);
             background-repeat: repeat;
+            background-attachment: cover;
             font-size: 15px;
         }
 
@@ -41,75 +42,313 @@
             display: block !important;
             width: 100% !important;
         }
-        /* -------------------------------- */
 
-        .card { background: transparent; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); color: #f5fffa; }
-        .logo { height: 50px; width: 50px; }
-        .constellation-card { margin: 15px 0; padding: 15px; }
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+        .constellation-card {
+            margin: 15px 0;
+            padding: 15px;
+        }
+
+        /* SVG icon style */
+        .topic-icon {
+            width: 160px;
+            height: 160px;
+            filter: drop-shadow(0 0 12px rgba(100, 200, 255, 0.3));
+            transition: 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        .topic-icon:hover {
+            filter: drop-shadow(0 0 28px #8fcbff);
+            transform: scale(1.02);
+        }
+        @media (max-width: 768px) {
+            .topic-icon {
+                width: 110px;
+                height: 110px;
+            }
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 20px;
+            background-size: 60%;
+        }
+        .btn-primary {
+            background: #0d6efd;
+            border: 1px solid #0d6efd;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+        }
+        .btn-success {
+            background: #198754;
+            border: 1px solid #198754;
+        }
+        .btn-success:hover {
+            background: #157347;
+        }
+        footer.bg-dark {
+            background-color: #212529 !important;
+        }
+        footer a {
+            color: #f8f9fa;
+        }
+        footer a:hover {
+            color: #adb5bd;
+        }
+        .card-title {
+            text-shadow: 0 0 8px rgba(0, 180, 255, 0.4);
+        }
+        .carousel-item .card {
+            min-height: 280px;
+        }
     </style>
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <!-- The navbar will be loaded dynamically from includes/header.html -->
     <div id="navbar-placeholder"></div>
 
     <div class="container mt-5">
         <h1 class="text-center text-light mb-4">✨ Constellations of the Night Sky</h1>
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card constellation-card">
-                    <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <h5 class="card-title">Orion - The Hunter</h5>
-                    <p class="card-text">One of the most recognizable constellations in the night sky. Orion features bright stars Betelgeuse and Rigel, and the famous Orion Nebula. Visible in winter months in the Northern Hemisphere.</p>
-                </div>
-            </div>
+        <!-- Carousel with constellation cards -->
+        <div id="constellationCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
 
-            <div class="col-md-4">
-                <div class="card constellation-card">
-                    <img src="https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <h5 class="card-title">Ursa Major - Big Dipper</h5>
-                    <p class="card-text">Contains the famous asterism known as the Big Dipper. These seven stars have helped navigators for centuries, particularly as a guide to finding Polaris, the North Star.</p>
+                <!-- Slide 1: Orion -->
+                <div class="carousel-item active">
+                    <div class="card constellation-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- belt -->
+                                    <circle cx="38" cy="52" r="4" fill="#f5e56b" />
+                                    <circle cx="50" cy="52" r="4" fill="#f5e56b" />
+                                    <circle cx="62" cy="52" r="4" fill="#f5e56b" />
+                                    <!-- shoulders -->
+                                    <circle cx="28" cy="28" r="6" fill="#ffb07c" />
+                                    <circle cx="72" cy="28" r="6" fill="#ffb07c" />
+                                    <!-- feet -->
+                                    <circle cx="32" cy="80" r="5" fill="#6ab0e6" />
+                                    <circle cx="68" cy="80" r="5" fill="#6ab0e6" />
+                                    <!-- nebula glow -->
+                                    <ellipse cx="50" cy="62" rx="14" ry="6" fill="#b0d8ff" opacity="0.3" />
+                                    <text x="14" y="18" font-size="8" fill="#b0d0f0" font-family="monospace">✦</text>
+                                    <text x="78" y="18" font-size="8" fill="#b0d0f0" font-family="monospace">✦</text>
+                                </svg>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Orion - The Hunter</h5>
+                                    <p class="card-text">One of the most recognizable constellations in the night sky. Orion features bright stars Betelgeuse and Rigel, and the famous Orion Nebula. Visible in winter months in the Northern Hemisphere.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card constellation-card">
-                    <img src="https://images.unsplash.com/photo-1458615536330-eb3167e1aa38?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <h5 class="card-title">Cassiopeia - Queen</h5>
-                    <p class="card-text">A distinctive W-shaped constellation named after the vain Queen Cassiopeia of Greek mythology. Easily visible in the Northern Sky and often used for navigation alongside the Big Dipper.</p>
+                <!-- Slide 2: Ursa Major -->
+                <div class="carousel-item">
+                    <div class="card constellation-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- Big Dipper shape -->
+                                    <circle cx="30" cy="30" r="5" fill="#f5e56b" />
+                                    <circle cx="42" cy="24" r="5" fill="#f5e56b" />
+                                    <circle cx="56" cy="24" r="5" fill="#f5e56b" />
+                                    <circle cx="68" cy="30" r="5" fill="#f5e56b" />
+                                    <circle cx="76" cy="44" r="5" fill="#f5e56b" />
+                                    <circle cx="66" cy="56" r="5" fill="#f5e56b" />
+                                    <circle cx="52" cy="56" r="5" fill="#f5e56b" />
+                                    <!-- handle -->
+                                    <line x1="30" y1="30" x2="42" y2="24" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="42" y1="24" x2="56" y2="24" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="56" y1="24" x2="68" y2="30" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="68" y1="30" x2="76" y2="44" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="76" y1="44" x2="66" y2="56" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="66" y1="56" x2="52" y2="56" stroke="#b0d0f0" stroke-width="2" />
+                                    <circle cx="84" cy="18" r="3" fill="#b0d0f0" opacity="0.5" />
+                                    <text x="12" y="86" font-size="8" fill="#b0d0f0" font-family="monospace">★</text>
+                                </svg>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Ursa Major - Big Dipper</h5>
+                                    <p class="card-text">Contains the famous asterism known as the Big Dipper. These seven stars have helped navigators for centuries, particularly as a guide to finding Polaris, the North Star.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card constellation-card">
-                    <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <h5 class="card-title">Pegasus - Winged Horse</h5>
-                    <p class="card-text">Prominent autumn constellation featuring the Great Square of Pegasus. This asterism helps locate many other constellations and deep-sky objects in the northern autumn sky.</p>
+                <!-- Slide 3: Cassiopeia -->
+                <div class="carousel-item">
+                    <div class="card constellation-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- W shape -->
+                                    <circle cx="16" cy="68" r="5" fill="#f5e56b" />
+                                    <circle cx="34" cy="30" r="5" fill="#f5e56b" />
+                                    <circle cx="50" cy="52" r="5" fill="#f5e56b" />
+                                    <circle cx="66" cy="30" r="5" fill="#f5e56b" />
+                                    <circle cx="84" cy="68" r="5" fill="#f5e56b" />
+                                    <line x1="16" y1="68" x2="34" y2="30" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="34" y1="30" x2="50" y2="52" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="50" y1="52" x2="66" y2="30" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="66" y1="30" x2="84" y2="68" stroke="#b0d0f0" stroke-width="2" />
+                                    <circle cx="50" cy="82" r="4" fill="#b0d0f0" opacity="0.4" />
+                                    <text x="8" y="12" font-size="8" fill="#b0d0f0" font-family="monospace">♛</text>
+                                </svg>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Cassiopeia - Queen</h5>
+                                    <p class="card-text">A distinctive W-shaped constellation named after the vain Queen Cassiopeia of Greek mythology. Easily visible in the Northern Sky and often used for navigation alongside the Big Dipper.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card constellation-card">
-                    <img src="https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <h5 class="card-title">Scorpius - The Scorpion</h5>
-                    <p class="card-text">A prominent zodiac constellation with a distinctive curved tail marked by bright stars. Home to the red supergiant star Antares, visible in the summer sky near the Milky Way.</p>
+                <!-- Slide 4: Pegasus -->
+                <div class="carousel-item">
+                    <div class="card constellation-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- Great Square -->
+                                    <circle cx="26" cy="34" r="5" fill="#f5e56b" />
+                                    <circle cx="74" cy="34" r="5" fill="#f5e56b" />
+                                    <circle cx="26" cy="66" r="5" fill="#f5e56b" />
+                                    <circle cx="74" cy="66" r="5" fill="#f5e56b" />
+                                    <line x1="26" y1="34" x2="74" y2="34" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="26" y1="34" x2="26" y2="66" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="74" y1="34" x2="74" y2="66" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="26" y1="66" x2="74" y2="66" stroke="#b0d0f0" stroke-width="2" />
+                                    <!-- wing hint -->
+                                    <path d="M74 34 L90 20 L82 42 L96 38 L84 54" stroke="#b0d0f0" stroke-width="2" opacity="0.6" />
+                                    <circle cx="50" cy="16" r="3" fill="#b0d0f0" opacity="0.5" />
+                                </svg>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Pegasus - Winged Horse</h5>
+                                    <p class="card-text">Prominent autumn constellation featuring the Great Square of Pegasus. This asterism helps locate many other constellations and deep-sky objects in the northern autumn sky.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card constellation-card">
-                    <img src="https://images.unsplash.com/photo-1458615536330-eb3167e1aa38?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <h5 class="card-title">Cygnus - The Swan</h5>
-                    <p class="card-text">A magnificent summer constellation located along the Milky Way. Also known as the Northern Cross, it contains bright star Deneb and several deep-sky objects including the North America Nebula.</p>
+                <!-- Slide 5: Scorpius -->
+                <div class="carousel-item">
+                    <div class="card constellation-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- scorpion shape -->
+                                    <circle cx="50" cy="22" r="6" fill="#ff6b4a" />
+                                    <circle cx="36" cy="30" r="4" fill="#f5e56b" />
+                                    <circle cx="28" cy="42" r="4" fill="#f5e56b" />
+                                    <circle cx="28" cy="56" r="4" fill="#f5e56b" />
+                                    <circle cx="36" cy="68" r="4" fill="#f5e56b" />
+                                    <circle cx="48" cy="76" r="4" fill="#f5e56b" />
+                                    <circle cx="60" cy="80" r="4" fill="#f5e56b" />
+                                    <circle cx="72" cy="76" r="4" fill="#f5e56b" />
+                                    <circle cx="80" cy="66" r="3" fill="#f5e56b" />
+                                    <line x1="50" y1="22" x2="36" y2="30" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="36" y1="30" x2="28" y2="42" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="28" y1="42" x2="28" y2="56" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="28" y1="56" x2="36" y2="68" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="36" y1="68" x2="48" y2="76" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="48" y1="76" x2="60" y2="80" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="60" y1="80" x2="72" y2="76" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="72" y1="76" x2="80" y2="66" stroke="#b0d0f0" stroke-width="2" />
+                                    <circle cx="16" cy="34" r="3" fill="#b0d0f0" opacity="0.4" />
+                                </svg>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Scorpius - The Scorpion</h5>
+                                    <p class="card-text">A prominent zodiac constellation with a distinctive curved tail marked by bright stars. Home to the red supergiant star Antares, visible in the summer sky near the Milky Way.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Slide 6: Cygnus -->
+                <div class="carousel-item">
+                    <div class="card constellation-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- Northern Cross -->
+                                    <circle cx="50" cy="12" r="6" fill="#f5e56b" />
+                                    <circle cx="50" cy="34" r="4" fill="#f5e56b" />
+                                    <circle cx="50" cy="56" r="4" fill="#f5e56b" />
+                                    <circle cx="50" cy="78" r="5" fill="#f5e56b" />
+                                    <circle cx="26" cy="44" r="4" fill="#f5e56b" />
+                                    <circle cx="74" cy="44" r="4" fill="#f5e56b" />
+                                    <line x1="50" y1="12" x2="50" y2="78" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="26" y1="44" x2="74" y2="44" stroke="#b0d0f0" stroke-width="2" />
+                                    <circle cx="32" cy="22" r="3" fill="#b0d0f0" opacity="0.4" />
+                                    <circle cx="68" cy="22" r="3" fill="#b0d0f0" opacity="0.4" />
+                                    <text x="16" y="90" font-size="8" fill="#b0d0f0" font-family="monospace">🦢</text>
+                                </svg>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Cygnus - The Swan</h5>
+                                    <p class="card-text">A magnificent summer constellation located along the Milky Way. Also known as the Northern Cross, it contains bright star Deneb and several deep-sky objects including the North America Nebula.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- carousel-inner -->
+
+            <!-- Carousel controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#constellationCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#constellationCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
-        <div class="text-center mt-5 mb-5">
-            <a href="../../index.html" class="btn btn-primary me-2"><i class="fas fa-home"></i> Home</a>
-            <a href="../main/QuizPage.html" class="btn btn-success"><i class="fas fa-book"></i> Take a Quiz</a>
+        <!-- Bottom buttons -->
+        <div class="d-flex justify-content-center mt-5">
+                <img src="https://cdna.artstation.com/p/assets/images/images/050/392/912/original/nelson-tiapa-gif-con-telefono.gif?1654734490"
+                    style="width: 200px;" alt="space gif">
+        </div>
+        <div class="d-flex justify-content-between">
+            <a href="../../index.html" class="btn btn-outline-primary mt-3"><i class="fa fa-home"></i> Home</a>
+            <a href="../main/QuizPage.html" class="btn btn-primary mt-3">Take a Quiz</a>
         </div>
     </div>
 
@@ -178,17 +417,12 @@
 
         $(document).ready(function() {
             const placeholder = document.getElementById('navbar-placeholder');
-
-            // Load the header from the includes folder
-            // Using ../../includes/header.html because this file is in a subfolder
             $("#navbar-placeholder").load("../../includes/header.html", function(response, status, xhr) {
                 if (status == "error") {
                     console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
-                    // Fallback: show a message if header fails to load
                     $("#navbar-placeholder").html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
                     return;
                 }
-
                 initDropdowns(placeholder);
             });
         });

@@ -12,6 +12,7 @@
             font-family: 'Press Start 2P', serif;
             background-image: url(../../assets/img/bg.png);
             background-repeat: repeat;
+            background-attachment: cover;
             font-size: 15px;
         }
 
@@ -41,57 +42,231 @@
             display: block !important;
             width: 100% !important;
         }
-        /* -------------------------------- */
 
-        .card { background: transparent; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); color: #f5fffa; }
-        .logo { height: 50px; width: 50px; }
-        .bio-card { margin: 15px 0; padding: 20px; }
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+        .bio-card {
+            margin: 15px 0;
+            padding: 20px;
+        }
+
+        .astronomer-img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(100, 200, 255, 0.2);
+            transition: 0.3s;
+            display: block;
+            margin: 0 auto;
+            background: #1a2a3a;
+        }
+        .astronomer-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(100, 200, 255, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .astronomer-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 20px;
+            background-size: 60%;
+        }
+        .btn-primary {
+            background: #0d6efd;
+            border: 1px solid #0d6efd;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+        }
+        .btn-success {
+            background: #198754;
+            border: 1px solid #198754;
+        }
+        .btn-success:hover {
+            background: #157347;
+        }
+        footer.bg-dark {
+            background-color: #212529 !important;
+        }
+        footer a {
+            color: #f8f9fa;
+        }
+        footer a:hover {
+            color: #adb5bd;
+        }
+        .card-title {
+            text-shadow: 0 0 8px rgba(0, 180, 255, 0.4);
+        }
+        .carousel-item .card {
+            min-height: 280px;
+        }
     </style>
 </head>
 <body>
+
     <!-- Navigation Bar Placeholder -->
     <div id="navbar-placeholder"></div>
 
     <div class="container mt-5">
-        <h1 class="text-center text-light mb-4">⭐ Famous Astronomers</h1>
+        <h1 class="text-center text-light mb-4"> Famous Astronomers</h1>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card bio-card">
-                    <h5 class="card-title">Galileo Galilei (1564-1642)</h5>
-                    <img src="https://images.unsplash.com/photo-1603349206295-dde20617cb6a?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <p class="card-text">Pioneer of observational astronomy. Galileo revolutionized astronomy by using the telescope to observe Jupiter's moons, Venus phases, and sunspots. His work challenged geocentric models and supported heliocentrism.</p>
-                </div>
-            </div>
+        <!-- Carousel with astronomer cards -->
+        <div id="astronomerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
 
-            <div class="col-md-6">
-                <div class="card bio-card">
-                    <h5 class="card-title">Isaac Newton (1642-1727)</h5>
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&h=300&auto=format&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <p class="card-text">Formulated the laws of motion and universal gravitation. Newton's theories provided the mathematical framework that explained planetary orbits and became the foundation of classical mechanics used in astronomy.</p>
+                <!-- Slide 1: Galileo Galilei -->
+                <div class="carousel-item active">
+                    <div class="card bio-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Galileo.arp.300pix.jpg/500px-Galileo.arp.300pix.jpg"
+                                     alt="Galileo Galilei"
+                                     class="astronomer-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Galileo Galilei (1564-1642)</h5>
+                                    <p class="card-text">Pioneer of observational astronomy. Galileo revolutionized astronomy by using the telescope to observe Jupiter's moons, Venus phases, and sunspots. His work challenged geocentric models and supported heliocentrism.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-6">
-                <div class="card bio-card">
-                    <h5 class="card-title">Edwin Hubble (1889-1953)</h5>
-                    <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?q=80&w=300&h=300&auto=format&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <p class="card-text">Discovered that galaxies exist beyond the Milky Way and that the universe is expanding. Hubble's findings revolutionized cosmology and demonstrated the vast scale of the universe far beyond what was previously believed.</p>
+                <!-- Slide 2: Isaac Newton -->
+                <div class="carousel-item">
+                    <div class="card bio-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Sir_Isaac_Newton_by_Sir_Godfrey_Kneller%2C_Bt.jpg/1280px-Sir_Isaac_Newton_by_Sir_Godfrey_Kneller%2C_Bt.jpg"
+                                     alt="Isaac Newton"
+                                     class="astronomer-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Isaac Newton (1642-1727)</h5>
+                                    <p class="card-text">Formulated the laws of motion and universal gravitation. Newton's theories provided the mathematical framework that explained planetary orbits and became the foundation of classical mechanics used in astronomy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-6">
-                <div class="card bio-card">
-                    <h5 class="card-title">Carl Sagan (1934-1996)</h5>
-                    <img src="https://images.unsplash.com/photo-1635070041078-e5b8cb665f1d?q=80;&w=300;&h=300;&auto=format;&fit=crop" class="img-fluid mb-3" style="border-radius: 10px;">
-                    <p class="card-text">Renowned astronomer, cosmologist, and science communicator. Sagan popularized astronomy and made complex concepts accessible. His Voyager Golden Record and public outreach inspired generations to study astronomy.</p>
+                <!-- Slide 3: Edwin Hubble -->
+                <div class="carousel-item">
+                    <div class="card bio-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Studio_portrait_photograph_of_Edwin_Powell_Hubble_%28cropped%29.JPG/500px-Studio_portrait_photograph_of_Edwin_Powell_Hubble_%28cropped%29.JPG"
+                                     alt="Edwin Hubble"
+                                     class="astronomer-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Edwin Hubble (1889-1953)</h5>
+                                    <p class="card-text">Discovered that galaxies exist beyond the Milky Way and that the universe is expanding. Hubble's findings revolutionized cosmology and demonstrated the vast scale of the universe far beyond what was previously believed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Slide 4: Carl Sagan -->
+                <div class="carousel-item">
+                    <div class="card bio-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Astronomer_Carl_Sagan_in_1987%2C_crop.jpg/1280px-Astronomer_Carl_Sagan_in_1987%2C_crop.jpg"
+                                     alt="Carl Sagan"
+                                     class="astronomer-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Carl Sagan (1934-1996)</h5>
+                                    <p class="card-text">Renowned astronomer, cosmologist, and science communicator. Sagan popularized astronomy and made complex concepts accessible. His Voyager Golden Record and public outreach inspired generations to study astronomy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Johannes Kepler -->
+                <div class="carousel-item">
+                    <div class="card bio-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Johannes_Kepler_by_Hans_von_Aachen.jpg"
+                                     alt="Johannes Kepler"
+                                     class="astronomer-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Johannes Kepler (1571-1630)</h5>
+                                    <p class="card-text">Formulated the three laws of planetary motion, describing the elliptical orbits of planets around the Sun. Kepler's work provided crucial evidence for heliocentrism and laid the groundwork for Newton's theory of gravitation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Cecilia Payne-Gaposchkin -->
+                <div class="carousel-item">
+                    <div class="card bio-card">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Cecelia_Gaposhkin_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+                                     alt="Cecilia Payne-Gaposchkin"
+                                     class="astronomer-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body m-1 m-md-3">
+                                    <h5 class="card-title">Cecilia Payne-Gaposchkin (1900-1979)</h5>
+                                    <p class="card-text">Discovered that stars are composed primarily of hydrogen and helium. Her groundbreaking thesis "Stellar Atmospheres" revolutionized astrophysics and demonstrated that the Sun's composition is similar to other stars.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- carousel-inner -->
+
+            <!-- Carousel controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#astronomerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#astronomerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
-        <div class="text-center mt-5 mb-5">
-            <a href="../../index.html" class="btn btn-primary me-2"><i class="fas fa-home"></i> Home</a>
-            <a href="../main/QuizPage.html" class="btn btn-success"><i class="fas fa-book"></i> Take a Quiz</a>
+        <!-- Bottom buttons -->
+        <div class="d-flex justify-content-center mt-5">
+            <img src="https://cdna.artstation.com/p/assets/images/images/050/392/912/original/nelson-tiapa-gif-con-telefono.gif?1654734490"
+                style="width: 200px;" alt="space gif">
+        </div>
+        <div class="d-flex justify-content-between">
+            <a href="../../index.html" class="btn btn-outline-primary mt-3"><i class="fa fa-home"></i> Home</a>
+            <a href="../main/QuizPage.html" class="btn btn-primary mt-3">Take a Quiz</a>
         </div>
     </div>
 
@@ -166,7 +341,6 @@
                     $("#navbar-placeholder").html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
                     return;
                 }
-
                 initDropdowns(placeholder);
             });
         });

@@ -12,6 +12,7 @@
             font-family: 'Press Start 2P', serif;
             background-image: url(../../assets/img/bg.png);
             background-repeat: repeat;
+            background-attachment: cover;
             font-size: 15px;
         }
 
@@ -41,11 +42,74 @@
             display: block !important;
             width: 100% !important;
         }
-        /* -------------------------------- */
 
-        .card { background: transparent; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); color: #f5fffa; }
-        .logo { height: 50px; width: 50px; }
-        .progress { height: 30px; }
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+        }
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+
+        /* SVG icon style */
+        .topic-icon {
+            width: 180px;
+            height: 180px;
+            filter: drop-shadow(0 0 12px rgba(100, 200, 255, 0.3));
+            transition: 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        .topic-icon:hover {
+            filter: drop-shadow(0 0 28px #8fcbff);
+            transform: scale(1.02);
+        }
+        @media (max-width: 768px) {
+            .topic-icon {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 20px;
+            background-size: 60%;
+        }
+        .btn-primary {
+            background: #0d6efd;
+            border: 1px solid #0d6efd;
+        }
+        .btn-primary:hover {
+            background: #0b5ed7;
+        }
+        .btn-success {
+            background: #198754;
+            border: 1px solid #198754;
+        }
+        .btn-success:hover {
+            background: #157347;
+        }
+        footer.bg-dark {
+            background-color: #212529 !important;
+        }
+        footer a {
+            color: #f8f9fa;
+        }
+        footer a:hover {
+            color: #adb5bd;
+        }
+        .card-title {
+            text-shadow: 0 0 8px rgba(0, 180, 255, 0.4);
+        }
+        .carousel-item .card {
+            min-height: 280px;
+        }
     </style>
 </head>
 <body>
@@ -53,19 +117,33 @@
     <div id="navbar-placeholder"></div>
 
     <div class="container mt-5">
-        <h1 class="text-center text-light mb-4">📐 Mathematics in Astronomy</h1>
-        <div class="progress mb-5"><div class="progress-bar" role="progressbar" style="width: 70%;">70/100</div></div>
+        <h1 class="text-center text-light mb-4">Mathematics in Astronomy</h1>
 
         <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
+
+                <!-- Slide 1: Trigonometry and Angles -->
                 <div class="carousel-item active">
-                    <div class="card mt-5">
-                        <div class="row m-3">
-                            <div class="col-md-3 m-3">
-                                <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                    <div class="card mt-3">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- Triangle -->
+                                    <polygon points="50,16 16,78 84,78" stroke="#f5e56b" stroke-width="3" fill="none" />
+                                    <!-- Angle arc -->
+                                    <path d="M50 60 L50 50 L68 50" stroke="#ffb07c" stroke-width="2" fill="none" />
+                                    <!-- Angle label -->
+                                    <text x="56" y="58" font-size="10" fill="#ffb07c" font-family="serif">θ</text>
+                                    <!-- Pi symbol -->
+                                    <text x="18" y="88" font-size="12" fill="#b0d0f0" font-family="serif">π</text>
+                                    <!-- Degree symbol -->
+                                    <text x="74" y="22" font-size="10" fill="#b0d0f0" font-family="serif">°</text>
+                                    <circle cx="50" cy="78" r="3" fill="#b0d0f0" opacity="0.5" />
+                                </svg>
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body m-3">
+                                <div class="card-body m-1 m-md-3">
                                     <h5 class="card-title">Trigonometry and Angles</h5>
                                     <p class="card-text">Trigonometry is fundamental to astronomy. Measuring angles between celestial objects, calculating distances using parallax, and understanding orbital mechanics all rely on trigonometric principles. These tools help astronomers map the universe.</p>
                                 </div>
@@ -74,14 +152,27 @@
                     </div>
                 </div>
 
+                <!-- Slide 2: Calculus and Motion -->
                 <div class="carousel-item">
-                    <div class="card mt-5">
-                        <div class="row m-3">
-                            <div class="col-md-3 m-3">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80;&w=400;&h=400;&auto=format;&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                    <div class="card mt-3">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- Integral symbol -->
+                                    <text x="28" y="60" font-size="32" fill="#f5e56b" font-family="serif">∫</text>
+                                    <!-- Derivative symbol -->
+                                    <text x="62" y="36" font-size="24" fill="#ffb07c" font-family="serif">d/dx</text>
+                                    <!-- Curve -->
+                                    <path d="M16 72 Q40 28 56 60 Q68 82 84 48" stroke="#b0d0f0" stroke-width="3" fill="none" />
+                                    <!-- Infinity -->
+                                    <text x="36" y="86" font-size="14" fill="#b0d0f0" font-family="serif">∞</text>
+                                    <circle cx="84" cy="48" r="3" fill="#f5e56b" />
+                                    <circle cx="16" cy="72" r="3" fill="#f5e56b" />
+                                </svg>
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body m-3">
+                                <div class="card-body m-1 m-md-3">
                                     <h5 class="card-title">Calculus and Motion</h5>
                                     <p class="card-text">Calculus describes the motion of celestial objects. Newton's laws of motion, combined with calculus, allow us to predict planetary orbits, calculate escape velocities, and understand gravitational interactions between massive objects.</p>
                                 </div>
@@ -90,14 +181,33 @@
                     </div>
                 </div>
 
+                <!-- Slide 3: Statistical Analysis -->
                 <div class="carousel-item">
-                    <div class="card mt-5">
-                        <div class="row m-3">
-                            <div class="col-md-3 m-3">
-                                <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?q=80&w=400&h=400&auto=format&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                    <div class="card mt-3">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- Bell curve -->
+                                    <path d="M20 70 Q30 20 50 20 Q70 20 80 70" stroke="#f5e56b" stroke-width="3" fill="none" />
+                                    <!-- Mean line -->
+                                    <line x1="50" y1="20" x2="50" y2="70" stroke="#ffb07c" stroke-width="2" stroke-dasharray="4 4" />
+                                    <!-- Sigma symbol -->
+                                    <text x="26" y="84" font-size="16" fill="#b0d0f0" font-family="serif">σ</text>
+                                    <!-- Data points -->
+                                    <circle cx="30" cy="62" r="3" fill="#b0d0f0" />
+                                    <circle cx="38" cy="50" r="3" fill="#b0d0f0" />
+                                    <circle cx="46" cy="38" r="3" fill="#b0d0f0" />
+                                    <circle cx="54" cy="38" r="3" fill="#b0d0f0" />
+                                    <circle cx="62" cy="50" r="3" fill="#b0d0f0" />
+                                    <circle cx="70" cy="62" r="3" fill="#b0d0f0" />
+                                    <!-- Error bars -->
+                                    <line x1="30" y1="56" x2="30" y2="68" stroke="#b0d0f0" stroke-width="1.5" />
+                                    <line x1="70" y1="56" x2="70" y2="68" stroke="#b0d0f0" stroke-width="1.5" />
+                                </svg>
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body m-3">
+                                <div class="card-body m-1 m-md-3">
                                     <h5 class="card-title">Statistical Analysis</h5>
                                     <p class="card-text">Statistics help astronomers analyze observational data from telescopes. Understanding probability, distribution, and error analysis allows researchers to draw meaningful conclusions about cosmic phenomena and test theoretical models.</p>
                                 </div>
@@ -106,14 +216,35 @@
                     </div>
                 </div>
 
+                <!-- Slide 4: Linear Algebra and Space -->
                 <div class="carousel-item">
-                    <div class="card mt-5">
-                        <div class="row m-3">
-                            <div class="col-md-3 m-3">
-                                <img src="https://images.unsplash.com/photo-1635070041078-e5b8cb665f1d?q=80;&w=400;&h=400;&auto=format;&fit=crop" style="height: 220px; width: 220px; object-fit: cover; border-radius: 10px;">
+                    <div class="card mt-3">
+                        <div class="row m-3 align-items-center">
+                            <div class="col-md-3 text-center my-2">
+                                <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                                    <!-- 3D coordinate system -->
+                                    <line x1="16" y1="72" x2="50" y2="72" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="50" y1="72" x2="84" y2="72" stroke="#b0d0f0" stroke-width="2" />
+                                    <line x1="16" y1="72" x2="50" y2="28" stroke="#ffb07c" stroke-width="2" />
+                                    <line x1="50" y1="28" x2="84" y2="72" stroke="#f5e56b" stroke-width="2" />
+                                    <!-- Axis labels -->
+                                    <text x="20" y="82" font-size="8" fill="#b0d0f0" font-family="serif">x</text>
+                                    <text x="78" y="82" font-size="8" fill="#b0d0f0" font-family="serif">y</text>
+                                    <text x="44" y="22" font-size="8" fill="#b0d0f0" font-family="serif">z</text>
+                                    <!-- Matrix -->
+                                    <text x="30" y="46" font-size="10" fill="#f5e56b" font-family="serif">[A]</text>
+                                    <!-- Vector arrow -->
+                                    <path d="M50 72 L66 52" stroke="#ffb07c" stroke-width="2" marker-end="url(#arrowhead)" />
+                                    <defs>
+                                        <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto">
+                                            <polygon points="0 0, 6 2, 0 4" fill="#ffb07c" />
+                                        </marker>
+                                    </defs>
+                                </svg>
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body m-3">
+                                <div class="card-body m-1 m-md-3">
                                     <h5 class="card-title">Linear Algebra and Space</h5>
                                     <p class="card-text">Linear algebra is essential for describing multi-dimensional space and transformations. Used in cosmology to understand spacetime curvature, gravitational fields, and the structure of the universe itself.</p>
                                 </div>
@@ -121,14 +252,28 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-            <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+
+            </div> <!-- carousel-inner -->
+
+            <!-- Carousel controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
-        <div class="text-center mt-5 mb-5">
-            <a href="../../index.html" class="btn btn-primary me-2"><i class="fas fa-home"></i> Home</a>
-            <a href="../main/QuizPage.html" class="btn btn-success"><i class="fas fa-book"></i> Take a Quiz</a>
+        <!-- Bottom buttons -->
+        <div class="d-flex justify-content-center mt-5">
+            <img src="https://cdna.artstation.com/p/assets/images/images/050/392/912/original/nelson-tiapa-gif-con-telefono.gif?1654734490"
+                style="width: 200px;" alt="space gif">
+        </div>
+        <div class="d-flex justify-content-between">
+            <a href="../../index.html" class="btn btn-outline-primary mt-3"><i class="fa fa-home"></i> Home</a>
+            <a href="../main/QuizPage.html" class="btn btn-primary mt-3">Take a Quiz</a>
         </div>
     </div>
 
@@ -203,7 +348,6 @@
                     $("#navbar-placeholder").html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
                     return;
                 }
-
                 initDropdowns(placeholder);
             });
         });
