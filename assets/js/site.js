@@ -7,7 +7,7 @@ const APP = (function() {
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
-    
+
     return {
         isProduction: isGitHubPages,
         isDevelopment: !isGitHubPages,
@@ -81,56 +81,49 @@ function initDropdowns(root) {
 
 /**
  * ============================================
- * FIX PATHS IN LOADED CONTENT
+ * PATH FIXING FOR INJECTED PARTIALS
  * ============================================
+ * header.html and footer.html are static files shared across every page,
+ * loaded via $.load(). They hardcode root-relative paths like
+ * "/index.html" or "/assets/img/Logo.png" so the SAME file resolves the
+ * same way regardless of which page/folder-depth loaded it.
+ *
+ * Root-relative paths always resolve from the actual domain root. Locally
+ * (served from the project root) that's correct as-is. On GitHub Pages
+ * project sites the domain root is one level ABOVE the repo
+ * (e.g. https://username.github.io/), so a raw "/assets/img/Logo.png"
+ * 404s there; it needs to become "/Solarscapes/assets/img/Logo.png".
+ *
+ * This function rewrites every root-relative href/src inside a freshly
+ * injected partial by prefixing it with APP.BASE_URL (empty string
+ * locally, "/Solarscapes" on GitHub Pages). Safe to run more than once —
+ * it strips any existing "/Solarscapes" prefix before re-adding it, so it
+ * won't double up.
  */
 function fixIncludePaths(root) {
-    const isGitHubPages = window.location.hostname.includes('github.io');
+    const basePath = APP.BASE_URL;
     const repoName = 'Solarscapes';
-    const basePath = isGitHubPages ? '/' + repoName : '';
-    
-    console.log('🔧 Fixing paths in loaded content...');
-    console.log('  Base path:', basePath || '/');
-    
+    const repoPrefixPattern = new RegExp('^/' + repoName + '(?=/|$)');
+
     function rewrite(el, attr) {
         let value = el.getAttribute(attr);
-        if (!value || value === '#' || value.startsWith('#')) return;
-        if (value.startsWith('http') || value.startsWith('mailto') || value.startsWith('tel')) return;
-        if (value.startsWith('data:')) return;
-        
-        const original = value;
-        
-        // Clean the path - remove any /Solarscapes/ prefix
-        value = value.replace(/^\/Solarscapes\//, '/');
-        value = value.replace(/^\/Solarscapes$/, '/');
-        value = value.replace(/^Solarscapes\//, '/');
-        
-        // Make it root-relative
-        if (!value.startsWith('/')) {
-            value = '/' + value;
-        }
-        
-        // Add base path if in production (GitHub Pages)
-        if (isGitHubPages) {
-            value = basePath + value;
-        }
-        
-        if (original !== value) {
-            console.log('  ✏️  Fixed:', original, '→', value);
-        }
-        
-        el.setAttribute(attr, value);
+        if (!value) return;
+        // Leave "#", empty, and non-root-relative URLs (http(s)://, mailto:, etc.) alone
+        if (value === '#' || value.startsWith('#')) return;
+        if (!value.startsWith('/')) return;
+
+        // Strip any existing /Solarscapes prefix so re-running this is safe
+        value = value.replace(repoPrefixPattern, '');
+
+        el.setAttribute(attr, basePath + value);
     }
-    
-    // Fix ALL links
-    const allLinks = root.querySelectorAll('[href]');
-    console.log('  Found', allLinks.length, 'links to fix');
-    allLinks.forEach(el => rewrite(el, 'href'));
-    
-    // Fix ALL images
-    const allImages = root.querySelectorAll('[src]');
-    console.log('  Found', allImages.length, 'images to fix');
-    allImages.forEach(el => rewrite(el, 'src'));
+
+    root.querySelectorAll('[href^="/"]').forEach(function (el) {
+        rewrite(el, 'href');
+    });
+    root.querySelectorAll('[src^="/"]').forEach(function (el) {
+        rewrite(el, 'src');
+    });
 }
 
 /**
@@ -162,7 +155,7 @@ $(document).ready(function () {
     // Determine depth for loading includes
     const path = window.location.pathname;
     let depth = '';
-    
+
     if (path.includes('/pages/learning/') || path.includes('/pages/main/') || path.includes('/pages/tools/')) {
         depth = '../../';
     } else if (path.includes('/pages/')) {
@@ -170,40 +163,34 @@ $(document).ready(function () {
     } else {
         depth = './';
     }
-    
-    // Load header
+
     const headerPath = depth + 'includes/header.html';
     const footerPath = depth + 'includes/footer.html';
-    
+
     console.log('📄 Loading header from:', headerPath);
-    console.log('📄 Loading footer from:', footerPath);
-    
-    // Load header
-    $('#navbar-placeholder').load(headerPath, function(response, status, xhr) {
+
+    const navPlaceholder = document.getElementById('navbar-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+
+    $('#navbar-placeholder').load(headerPath, function (response, status, xhr) {
         if (status === 'error') {
-            console.error('❌ Error loading header:', xhr.status, xhr.statusText);
-            $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
+            console.error('❌ Error loading header:', xhr.status);
+            $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation.</div>');
             return;
         }
-        console.log('✅ Header loaded successfully!');
-        const navPlaceholder = document.getElementById('navbar-placeholder');
-        if (navPlaceholder) {
-            fixIncludePaths(navPlaceholder);
-            initDropdowns(navPlaceholder);
-        }
+        console.log('✅ Header loaded!');
+
+        fixIncludePaths(navPlaceholder);
+        initDropdowns(navPlaceholder);
     });
-    
-    // Load footer
-    $('#footer-placeholder').load(footerPath, function(response, status, xhr) {
+
+    $('#footer-placeholder').load(footerPath, function (response, status, xhr) {
         if (status === 'error') {
-            console.error('❌ Error loading footer:', xhr.status, xhr.statusText);
-            $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+            console.error('❌ Error loading footer:', xhr.status);
             return;
         }
-        console.log('✅ Footer loaded successfully!');
-        const footerPlaceholder = document.getElementById('footer-placeholder');
-        if (footerPlaceholder) {
-            fixIncludePaths(footerPlaceholder);
-        }
+        console.log('✅ Footer loaded!');
+
+        fixIncludePaths(footerPlaceholder);
     });
 });
