@@ -8,7 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
     <style>
-        body { font-family: 'Press Start 2P', serif; background-image: url(../../assets/img/bg.png); background-repeat: repeat; font-size: 15px; }
+        body {
+            font-family: 'Press Start 2P', serif;
+            font-weight: bold;
+            background-image: url(../../assets/img/bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-weight: 100;
+            font-size: 15px;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #footer-placeholder {
+            margin-top: auto;
+        }
+
+        #footer-placeholder footer {
+            width: 100%;
+        }
 
         /* ----- NAVBAR STACKING FIX ----- */
         #navbar-placeholder {

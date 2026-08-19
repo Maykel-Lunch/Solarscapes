@@ -11,9 +11,31 @@
         body {
             font-family: 'Press Start 2P', serif;
             background-image: url(../../assets/img/bg.png);
-            background-repeat: repeat;
-            background-attachment: cover;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             font-size: 15px;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #footer-placeholder {
+            margin-top: auto;
+        }
+
+        #footer-placeholder footer {
+            width: 100%;
         }
 
         /* ----- NAVBAR STACKING FIX ----- */
