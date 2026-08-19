@@ -20,7 +20,7 @@ const APP = (function() {
     };
 })();
 
-console.log('🌍 Environment:', APP.isProduction ? 'Production (GitHub Pages)' : 'Development (Local)');
+console.log('🌍 Environment:', APP.isProduction ? 'Production' : 'Development');
 console.log('📁 Base Path:', APP.BASE_URL || '/ (root)');
 
 /**
@@ -82,59 +82,75 @@ function initDropdowns(root) {
 
 /**
  * ============================================
- * FIX PATHS IN LOADED CONTENT
+ * FIX PATHS - THE AGGRESSIVE VERSION
  * ============================================
  */
 function fixIncludePaths(root) {
     const basePath = APP.BASE_URL;
     
-    console.log('🔧 Fixing paths in loaded content...');
+    console.log('🔧 FIXING PATHS - AGGRESSIVE MODE ACTIVATED!');
+    console.log('  Base Path:', basePath || '/');
     console.log('  Root element:', root);
     
-    function rewrite(el, attr) {
-        let value = el.getAttribute(attr);
-        if (!value || value === '#' || value.startsWith('#')) return;
-        if (value.startsWith('http') || value.startsWith('mailto') || value.startsWith('tel')) return;
-        if (value.startsWith('data:')) return;
-        
-        const original = value;
-        
-        // If path already has /Solarscapes/, remove it
-        if (value.startsWith('/Solarscapes/')) {
-            value = value.replace('/Solarscapes', '');
-        }
-        
-        // If path starts with Solarscapes/ (no slash), remove it
-        if (value.startsWith('Solarscapes/')) {
-            value = value.replace('Solarscapes', '');
-        }
-        
-        // Make sure it starts with /
-        if (!value.startsWith('/')) {
-            value = '/' + value;
-        }
-        
-        // Add base path if in production
-        if (APP.isProduction) {
-            value = basePath + value;
-        }
-        
-        if (original !== value) {
-            console.log('  ✏️  Fixed:', original, '→', value);
-        }
-        
-        el.setAttribute(attr, value);
-    }
-    
-    // Fix ALL links - including dropdown items
+    // FIX EVERY SINGLE LINK
     const allLinks = root.querySelectorAll('a[href]');
     console.log('  Found', allLinks.length, 'links to fix');
-    allLinks.forEach(el => rewrite(el, 'href'));
     
-    // Fix ALL images
+    allLinks.forEach(function(link, index) {
+        let href = link.getAttribute('href');
+        const original = href;
+        
+        // Skip empty or anchor links
+        if (!href || href === '#' || href.startsWith('#')) return;
+        if (href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) return;
+        if (href.startsWith('data:')) return;
+        
+        // ===== THE MAGIC FIX =====
+        // If link starts with /pages/ but NOT /Solarscapes/pages/
+        if (href.startsWith('/pages/') && !href.startsWith('/Solarscapes/pages/')) {
+            // Add /Solarscapes/ to the beginning
+            href = '/Solarscapes' + href;
+            console.log('  ✏️  Fixed link #' + (index + 1) + ':', original, '→', href);
+        }
+        // If link starts with pages/ (no slash)
+        else if (href.startsWith('pages/')) {
+            href = '/Solarscapes/' + href;
+            console.log('  ✏️  Fixed link #' + (index + 1) + ':', original, '→', href);
+        }
+        // If link starts with /assets/ but NOT /Solarscapes/assets/
+        else if (href.startsWith('/assets/') && !href.startsWith('/Solarscapes/assets/')) {
+            href = '/Solarscapes' + href;
+            console.log('  ✏️  Fixed asset #' + (index + 1) + ':', original, '→', href);
+        }
+        // If link is root-relative and we're on GitHub Pages
+        else if (href.startsWith('/') && APP.isProduction && !href.startsWith('/Solarscapes/')) {
+            href = '/Solarscapes' + href;
+            console.log('  ✏️  Fixed root link #' + (index + 1) + ':', original, '→', href);
+        }
+        
+        link.setAttribute('href', href);
+    });
+    
+    // FIX EVERY SINGLE IMAGE
     const allImages = root.querySelectorAll('img[src]');
     console.log('  Found', allImages.length, 'images to fix');
-    allImages.forEach(el => rewrite(el, 'src'));
+    
+    allImages.forEach(function(img, index) {
+        let src = img.getAttribute('src');
+        const original = src;
+        
+        if (!src) return;
+        if (src.startsWith('http') || src.startsWith('data:')) return;
+        
+        if (src.startsWith('/assets/') && !src.startsWith('/Solarscapes/assets/')) {
+            src = '/Solarscapes' + src;
+            console.log('  ✏️  Fixed image #' + (index + 1) + ':', original, '→', src);
+        }
+        
+        img.setAttribute('src', src);
+    });
+    
+    console.log('✅ Done fixing paths!');
 }
 
 /**
@@ -163,19 +179,27 @@ function fixIncludePaths(root) {
  * ============================================
  */
 $(document).ready(function () {
-    const headerPath = APP.INCLUDES_URL + '/header.html';
-    const footerPath = APP.INCLUDES_URL + '/footer.html';
+    // DETECT PAGE DEPTH
+    const path = window.location.pathname;
+    let depth = '';
+    
+    if (path.includes('/pages/learning/') || path.includes('/pages/main/') || path.includes('/pages/tools/')) {
+        depth = '../../';
+        console.log('📁 Page depth: 2 levels (pages/*/)');
+    } else if (path.includes('/pages/')) {
+        depth = '../';
+        console.log('📁 Page depth: 1 level (pages/)');
+    } else {
+        depth = './';
+        console.log('📁 Page depth: Root');
+    }
+    
+    // LOAD HEADER
+    const headerPath = depth + 'includes/header.html';
+    const footerPath = depth + 'includes/footer.html';
     
     console.log('📄 Loading header from:', headerPath);
     console.log('📄 Loading footer from:', footerPath);
-    
-    // Check if elements exist
-    if ($('#navbar-placeholder').length === 0) {
-        console.error('❌ navbar-placeholder element not found!');
-    }
-    if ($('#footer-placeholder').length === 0) {
-        console.error('❌ footer-placeholder element not found!');
-    }
     
     // Load header
     $('#navbar-placeholder').load(headerPath, function(response, status, xhr) {
@@ -186,13 +210,12 @@ $(document).ready(function () {
             return;
         }
         console.log('✅ Header loaded successfully!');
-        console.log('📄 Header content length:', response.length, 'characters');
         
         const navPlaceholder = document.getElementById('navbar-placeholder');
         if (navPlaceholder) {
-            console.log('🔧 Fixing header paths...');
+            // FIX ALL PATHS
             fixIncludePaths(navPlaceholder);
-            console.log('🔧 Initializing dropdowns...');
+            // INIT DROPDOWNS
             initDropdowns(navPlaceholder);
             console.log('✅ Header setup complete!');
         }
@@ -209,7 +232,6 @@ $(document).ready(function () {
         console.log('✅ Footer loaded successfully!');
         const footerPlaceholder = document.getElementById('footer-placeholder');
         if (footerPlaceholder) {
-            console.log('🔧 Fixing footer paths...');
             fixIncludePaths(footerPlaceholder);
         }
     });
