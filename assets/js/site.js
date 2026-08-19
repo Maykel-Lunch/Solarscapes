@@ -20,8 +20,6 @@ const APP = (function() {
     };
 })();
 
-console.log('🌍 Environment:', APP.isProduction ? 'Production' : 'Development');
-
 /**
  * ============================================
  * DROPDOWN FUNCTIONALITY
@@ -167,8 +165,6 @@ $(document).ready(function () {
     const headerPath = depth + 'includes/header.html';
     const footerPath = depth + 'includes/footer.html';
 
-    console.log('📄 Loading header from:', headerPath);
-
     const navPlaceholder = document.getElementById('navbar-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
@@ -178,7 +174,6 @@ $(document).ready(function () {
             $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation.</div>');
             return;
         }
-        console.log('✅ Header loaded!');
 
         fixIncludePaths(navPlaceholder);
         initDropdowns(navPlaceholder);
@@ -189,7 +184,6 @@ $(document).ready(function () {
             console.error('❌ Error loading footer:', xhr.status);
             return;
         }
-        console.log('✅ Footer loaded!');
 
         fixIncludePaths(footerPlaceholder);
     });
