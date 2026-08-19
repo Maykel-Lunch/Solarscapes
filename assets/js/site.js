@@ -98,33 +98,14 @@ $(document).ready(function () {
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
 
-    // ===== CRITICAL FIX: Determine the correct path to includes =====
-    // Get the current page path and calculate how many levels deep we are
-    const pathname = window.location.pathname;
-    let relativePath = '';
-    
-    // Check if we're in a subfolder
-    if (pathname.includes('/pages/learning/')) {
-        relativePath = '../../';
-    } else if (pathname.includes('/pages/main/')) {
-        relativePath = '../../';
-    } else if (pathname.includes('/pages/tools/')) {
-        relativePath = '../../';
-    } else if (pathname.includes('/pages/')) {
-        relativePath = '../';
-    } else {
-        relativePath = './';
-    }
+    // ===== SIMPLIFIED: Use the SAME path for both environments =====
+    // Local:  http://127.0.0.1:5500/Solarscapes/includes/header.html
+    // GitHub: https://maykel-lunch.github.io/Solarscapes/includes/header.html
+    const headerPath = basePath + '/includes/header.html';
+    const footerPath = basePath + '/includes/footer.html';
 
-    // For GitHub Pages, we need to handle the subpath differently
-    // If on GitHub Pages, the basePath already includes /Solarscapes/
-    const headerPath = isGitHubPages 
-        ? basePath + '/includes/header.html'  // GitHub: /Solarscapes/includes/header.html
-        : relativePath + 'includes/header.html'; // Local: ../../includes/header.html
-
-    const footerPath = isGitHubPages
-        ? basePath + '/includes/footer.html'
-        : relativePath + 'includes/footer.html';
+    console.log('Loading header from: ' + headerPath);
+    console.log('Loading footer from: ' + footerPath);
 
     const navPlaceholder = document.getElementById('navbar-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
@@ -133,26 +114,32 @@ $(document).ready(function () {
     if (navPlaceholder) {
         $(navPlaceholder).load(headerPath, function (response, status, xhr) {
             if (status === 'error') {
-                console.log('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
-                console.log('Tried to load from: ' + headerPath);
+                console.error('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
+                console.error('Tried to load from: ' + headerPath);
                 $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
                 return;
             }
+            console.log('Header loaded successfully from: ' + headerPath);
             fixIncludePaths(navPlaceholder);
             initDropdowns(navPlaceholder);
         });
+    } else {
+        console.error('navbar-placeholder element not found!');
     }
 
     // Load footer
     if (footerPlaceholder) {
         $(footerPlaceholder).load(footerPath, function (response, status, xhr) {
             if (status === 'error') {
-                console.log('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
-                console.log('Tried to load from: ' + footerPath);
+                console.error('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
+                console.error('Tried to load from: ' + footerPath);
                 $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
                 return;
             }
+            console.log('Footer loaded successfully from: ' + footerPath);
             fixIncludePaths(footerPlaceholder);
         });
+    } else {
+        console.error('footer-placeholder element not found!');
     }
 });
