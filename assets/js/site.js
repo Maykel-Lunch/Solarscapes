@@ -1,6 +1,5 @@
 // Favicon — injected here since header.html loads into <body>, not <head>
 (function () {
-    // DETECT ENVIRONMENT
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
@@ -69,77 +68,109 @@ function initDropdowns(root) {
     });
 }
 
-// ===== FUNCTION TO FIX ROOT-RELATIVE PATHS =====
+// ===== FIX ALL PATHS IN THE HEADER =====
 function fixIncludePaths(root) {
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
 
-    function rewrite(el, attr) {
-        let value = el.getAttribute(attr);
-        if (!value || value === '#' || value.startsWith('#')) return;
-        if (!value.startsWith('/')) return;
+    console.log('🔧 Fixing paths in header...');
+    console.log('isGitHubPages:', isGitHubPages);
+    console.log('basePath:', basePath);
 
-        value = value.replace(new RegExp('^/' + repoName + '(?=/|$)'), '');
-        el.setAttribute(attr, basePath + value);
-    }
-
-    root.querySelectorAll('[href^="/"]').forEach(function (el) {
-        rewrite(el, 'href');
+    // Fix ALL links
+    root.querySelectorAll('a[href]').forEach(function (el) {
+        let href = el.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('#')) return;
+        if (href.startsWith('http') || href.startsWith('mailto')) return;
+        
+        // Original for debugging
+        const original = href;
+        
+        // Remove any /Solarscapes/ prefix
+        href = href.replace(/^\/Solarscapes\//, '/');
+        href = href.replace(/^\/Solarscapes$/, '/');
+        
+        // Remove any Solarscapes/ prefix (no slash)
+        href = href.replace(/^Solarscapes\//, '/');
+        
+        // Make sure it starts with /
+        if (!href.startsWith('/')) {
+            href = '/' + href;
+        }
+        
+        // Add basePath if on GitHub
+        if (isGitHubPages) {
+            href = '/Solarscapes' + href;
+        }
+        
+        if (original !== href) {
+            console.log('  ✏️  Fixed:', original, '→', href);
+        }
+        el.setAttribute('href', href);
     });
-    root.querySelectorAll('[src^="/"]').forEach(function (el) {
-        rewrite(el, 'src');
+
+    // Fix all images
+    root.querySelectorAll('img[src]').forEach(function (el) {
+        let src = el.getAttribute('src');
+        if (!src || src.startsWith('http') || src.startsWith('data:')) return;
+        
+        const original = src;
+        src = src.replace(/^\/Solarscapes\//, '/');
+        src = src.replace(/^Solarscapes\//, '/');
+        
+        if (!src.startsWith('/')) {
+            src = '/' + src;
+        }
+        
+        if (isGitHubPages) {
+            src = '/Solarscapes' + src;
+        }
+        
+        if (original !== src) {
+            console.log('  ✏️  Fixed image:', original, '→', src);
+        }
+        el.setAttribute('src', src);
     });
 }
 
 $(document).ready(function () {
-    // DETECT ENVIRONMENT
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
 
-    // ===== SIMPLIFIED: Use the SAME path for both environments =====
-    // Local:  http://127.0.0.1:5500/Solarscapes/includes/header.html
-    // GitHub: https://maykel-lunch.github.io/Solarscapes/includes/header.html
-    const headerPath = basePath + '/includes/header.html';
-    const footerPath = basePath + '/includes/footer.html';
-
-    console.log('Loading header from: ' + headerPath);
-    console.log('Loading footer from: ' + footerPath);
-
-    const navPlaceholder = document.getElementById('navbar-placeholder');
-    const footerPlaceholder = document.getElementById('footer-placeholder');
+    console.log('🚀 Site loaded!');
+    console.log('Environment:', isGitHubPages ? 'GitHub Pages' : 'Local');
+    console.log('Base path:', basePath);
 
     // Load header
-    if (navPlaceholder) {
-        $(navPlaceholder).load(headerPath, function (response, status, xhr) {
-            if (status === 'error') {
-                console.error('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
-                console.error('Tried to load from: ' + headerPath);
-                $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
-                return;
-            }
-            console.log('Header loaded successfully from: ' + headerPath);
-            fixIncludePaths(navPlaceholder);
-            initDropdowns(navPlaceholder);
-        });
-    } else {
-        console.error('navbar-placeholder element not found!');
-    }
+    const headerPath = basePath + '/includes/header.html';
+    console.log('📄 Loading header from:', headerPath);
+    
+    $('#navbar-placeholder').load(headerPath, function (response, status, xhr) {
+        if (status === 'error') {
+            console.error('❌ Error loading header:', xhr.status, xhr.statusText);
+            $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
+            return;
+        }
+        console.log('✅ Header loaded successfully!');
+        
+        const navPlaceholder = document.getElementById('navbar-placeholder');
+        fixIncludePaths(navPlaceholder);
+        initDropdowns(navPlaceholder);
+    });
 
     // Load footer
-    if (footerPlaceholder) {
-        $(footerPlaceholder).load(footerPath, function (response, status, xhr) {
-            if (status === 'error') {
-                console.error('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
-                console.error('Tried to load from: ' + footerPath);
-                $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
-                return;
-            }
-            console.log('Footer loaded successfully from: ' + footerPath);
-            fixIncludePaths(footerPlaceholder);
-        });
-    } else {
-        console.error('footer-placeholder element not found!');
-    }
+    const footerPath = basePath + '/includes/footer.html';
+    console.log('📄 Loading footer from:', footerPath);
+    
+    $('#footer-placeholder').load(footerPath, function (response, status, xhr) {
+        if (status === 'error') {
+            console.error('❌ Error loading footer:', xhr.status, xhr.statusText);
+            $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+            return;
+        }
+        console.log('✅ Footer loaded successfully!');
+        fixIncludePaths(document.getElementById('footer-placeholder'));
+    });
 });
