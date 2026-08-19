@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <title>Quiz Page: Solarscapes</title>
+    <style>
+        body {
+            font-family: 'Press Start 2P', serif;
+            font-weight: bold;
+            background-image: url("../../assets/img/bg.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-size: 13px;
+        }
+
+        /* ----- FIX TEXT OVERFLOW - ENSURE FULL TEXT VISIBLE ----- */
+        .card-body {
+            overflow: visible !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+            white-space: normal !important;
+        }
+
+        .card-title {
+            font-size: 16px;
+            line-height: 1.6;
+            word-wrap: break-word !important;
+            white-space: normal !important;
+            overflow: visible !important;
+        }
+
+        .card-text {
+            font-size: 12px;
+            line-height: 1.8;
+            word-wrap: break-word !important;
+            white-space: normal !important;
+            overflow: visible !important;
+            margin-bottom: 15px;
+        }
+
+        /* ----- QUIZ ICON SVG STYLES - CENTERED & LARGER ----- */
+        .quiz-icon-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+            width: 100%;
+            height: 100%;
+            min-height: 220px;
+        }
+
+        .quiz-svg {
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(0 0 30px rgba(100, 200, 255, 0.4));
+            transition: transform 0.3s ease, filter 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .quiz-svg:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 50px rgba(100, 200, 255, 0.6));
+        }
+
+        @media (max-width: 768px) {
+            .quiz-svg {
+                width: 160px;
+                height: 160px;
+            }
+            .quiz-icon-wrap {
+                min-height: 180px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .quiz-svg {
+                width: 130px;
+                height: 130px;
+            }
+            .quiz-icon-wrap {
+                min-height: 150px;
+                padding: 10px 0;
+            }
+        }
+
+        /* ----- MULTIPLE CHOICE - NO RADIO BUTTONS ----- */
+        .quiz-options {
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .quiz-options .option-card {
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quiz-options .option-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .quiz-options .option-card.selected {
+            background: rgba(13, 110, 253, 0.25);
+            border-color: #0d6efd;
+            box-shadow: 0 0 20px rgba(13, 110, 253, 0.2);
+        }
+
+        .quiz-options .option-card.correct {
+            background: rgba(25, 135, 84, 0.25);
+            border-color: #198754;
+            box-shadow: 0 0 20px rgba(25, 135, 84, 0.2);
+        }
+
+        .quiz-options .option-card.wrong {
+            background: rgba(220, 53, 69, 0.25);
+            border-color: #dc3545;
+            box-shadow: 0 0 20px rgba(220, 53, 69, 0.2);
+        }
+
+        .quiz-options .option-card .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            color: #b0d0f0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-options .option-card:hover .option-letter {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .quiz-options .option-card.selected .option-letter {
+            background: #0d6efd;
+            border-color: #0d6efd;
+            color: #fff;
+        }
+
+        .quiz-options .option-card.correct .option-letter {
+            background: #198754;
+            border-color: #198754;
+            color: #fff;
+        }
+
+        .quiz-options .option-card.wrong .option-letter {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .quiz-options .option-card .option-text {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #f0f8ff;
+            word-wrap: break-word !important;
+            white-space: normal !important;
+            flex: 1;
+        }
+
+        /* Disabled options after answering */
+        .quiz-options .option-card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .quiz-options .option-card.disabled:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ----- FOOTER STICKY BOTTOM FIX ----- */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #footer-placeholder {
+            margin-top: auto;
+        }
+
+        #footer-placeholder footer {
+            width: 100%;
+        }
+
+        /* ----- NAVBAR STACKING FIX ----- */
+        #navbar-placeholder {
+            position: relative;
+            z-index: 1050;
+        }
+        #navbar-placeholder .navbar,
+        #navbar-placeholder .navbar-collapse,
+        #navbar-placeholder .nav-item.dropdown {
+            overflow: visible;
+        }
+        #navbar-placeholder .dropdown-menu {
+            z-index: 1051;
+        }
+        #navbar-placeholder .dropdown-menu.show {
+            display: flex !important;
+            flex-direction: column !important;
+            min-width: 12rem !important;
+        }
+        #navbar-placeholder .dropdown-menu.show>li {
+            display: block !important;
+            width: 100% !important;
+        }
+        #navbar-placeholder .dropdown-menu.show>li>.dropdown-item {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .logo {
+            height: 50px;
+            width: 50px;
+        }
+
+        .card {
+            background: transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            color: #f5fffa;
+            overflow: visible !important;
+            height: auto !important;
+        }
+
+        /* ----- FIX: center the icon column against the (taller) text column ----- */
+        .card .row {
+            align-items: center !important;
+            overflow: visible !important;
+        }
+
+        .card .col-md-8,
+        .card .col-md-3 {
+            overflow: visible !important;
+            height: auto !important;
+        }
+
+        @media (max-width: 768px) {
+            .card .row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            body {
+                font-size: 11px;
+            }
+
+            .card-title {
+                font-size: 14px;
+            }
+
+            .card-text {
+                font-size: 11px;
+            }
+
+            .quiz-options .option-card {
+                padding: 10px 14px;
+            }
+
+            .quiz-options .option-card .option-text {
+                font-size: 10px;
+            }
+
+            .quiz-options .option-card .option-letter {
+                min-width: 28px;
+                height: 28px;
+                font-size: 10px;
+            }
+
+            .card-body {
+                padding: 0.5rem !important;
+            }
+
+            .card {
+                margin-left: 10px !important;
+                margin-right: 10px !important;
+            }
+
+            .btn {
+                font-size: 10px !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                font-size: 10px;
+            }
+
+            .card-title {
+                font-size: 12px;
+            }
+
+            .card-text {
+                font-size: 9px;
+                line-height: 1.8;
+            }
+
+            .quiz-options .option-card {
+                padding: 8px 12px;
+            }
+
+            .quiz-options .option-card .option-text {
+                font-size: 9px;
+            }
+
+            .quiz-options .option-card .option-letter {
+                min-width: 24px;
+                height: 24px;
+                font-size: 9px;
+            }
+
+            .btn {
+                font-size: 8px !important;
+                padding: 5px 8px !important;
+            }
+
+            .btn-group-wrap .btn {
+                flex: 1 1 100%;
+                white-space: normal;
+            }
+        }
+
+        .result {
+            border-radius: 20px !important;
+            padding: 10px 20px;
+        }
+
+        .result .alert {
+            font-size: 12px;
+            word-wrap: break-word !important;
+            white-space: normal !important;
+            overflow: visible !important;
+        }
+
+        @media (max-width: 768px) {
+            .result .alert {
+                font-size: 10px;
+            }
+        }
+
+        #Finish .card {
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-group-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-group-wrap .btn {
+            flex: 0 0 auto;
+            font-size: 11px !important;
+            padding: 10px 20px;
+        }
+
+        .container {
+            overflow: visible !important;
+        }
+
+        .mt-5 {
+            overflow: visible !important;
+        }
+
+        .m-3,
+        .m-1,
+        .m-md-3 {
+            overflow: visible !important;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            margin-bottom: 20px;
+        }
+
+        .progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #0d6efd, #4ab3ff);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .question-counter {
+            font-size: 11px;
+            color: #b0d0f0;
+            margin-bottom: 5px;
+        }
+
+        /* Check mark and X icons */
+        .option-card .result-icon {
+            margin-left: auto;
+            font-size: 18px;
+            display: none;
+        }
+
+        .option-card.correct .result-icon.correct-icon {
+            display: block;
+            color: #198754;
+        }
+
+        .option-card.wrong .result-icon.wrong-icon {
+            display: block;
+            color: #dc3545;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Quiz Content -->
+    <div class="container mt-5">
+        <div class="card mt-5 mx-2 mx-md-5" id="q1">
+            <div class="row m-3 align-items-center">
+                <div class="col-md-3 text-center my-2">
+                    <div class="quiz-icon-wrap">
+                        <svg class="quiz-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                            <circle cx="50" cy="50" r="18" fill="#f7c948" />
+                            <circle cx="30" cy="30" r="6" fill="#ffd966" />
+                            <circle cx="70" cy="40" r="5" fill="#ffd966" />
+                            <circle cx="40" cy="70" r="5" fill="#ffd966" />
+                            <circle cx="65" cy="65" r="4" fill="#ffd966" />
+                            <path d="M50 12 L50 6 M50 94 L50 88 M12 50 L6 50 M94 50 L88 50" stroke="#b0d0f0" stroke-width="2" />
+                            <text x="44" y="86" font-size="8" fill="#b0d0f0" font-family="monospace">✦</text>
+                            <text x="8" y="20" font-size="8" fill="#b0d0f0" font-family="monospace">✦</text>
+                            <text x="78" y="18" font-size="8" fill="#b0d0f0" font-family="monospace">✦</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-1 m-md-3">
+                        <h5 class="card-title">Astronomy Basics</h5>
+                        <div class="question-counter">Question 1 of 5</div>
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                        <p class="card-text">What is the name of the closest star to Earth?</p>
+                        <div class="quiz-options" id="options-q1">
+                            <div class="option-card" onclick="selectOption('q1', '1')" data-question="q1" data-value="1">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Proxima Centauri</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q1', '2')" data-question="q1" data-value="2">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Betelgeuse</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q1', '3')" data-question="q1" data-value="3">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Sirius</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q1', '4')" data-question="q1" data-value="4">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Alpha Centauri</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="btn-group-wrap">
+                            <button class="btn btn-primary" id="checkAnswer1">Check Answer</button>
+                            <button class="btn btn-primary" id="nextQ1" style="display: none;">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5 mx-2 mx-md-5" id="q2" style="display: none;">
+            <div class="row m-3 align-items-center">
+                <div class="col-md-3 text-center my-2">
+                    <div class="quiz-icon-wrap">
+                        <svg class="quiz-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                            <circle cx="50" cy="50" r="24" fill="#2a6a8a" />
+                            <circle cx="50" cy="50" r="12" fill="#4ab3ff" />
+                            <path d="M50 8 L50 14 M50 86 L50 92 M8 50 L14 50 M86 50 L92 50" stroke="#b0d0f0" stroke-width="2" />
+                            <path d="M26 26 L30 30 M74 26 L70 30 M26 74 L30 70 M74 74 L70 70" stroke="#b0d0f0" stroke-width="2" />
+                            <text x="44" y="84" font-size="8" fill="#b0d0f0" font-family="monospace">🌍</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-1 m-md-3">
+                        <h5 class="card-title">Astronomy Basics</h5>
+                        <div class="question-counter">Question 2 of 5</div>
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                        <p class="card-text">How does Earth's rotation create day and night?</p>
+                        <div class="quiz-options" id="options-q2">
+                            <div class="option-card" onclick="selectOption('q2', '1')" data-question="q2" data-value="1">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Revolution around the sun</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q2', '2')" data-question="q2" data-value="2">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Axial tilt</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q2', '3')" data-question="q2" data-value="3">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Gravitational pull</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q2', '4')" data-question="q2" data-value="4">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Spin on its axis</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="btn-group-wrap">
+                            <button class="btn btn-primary" id="checkAnswer2">Check Answer</button>
+                            <button class="btn btn-primary" id="nextQ2" style="display: none;">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5 mx-2 mx-md-5" id="q3" style="display: none;">
+            <div class="row m-3 align-items-center">
+                <div class="col-md-3 text-center my-2">
+                    <div class="quiz-icon-wrap">
+                        <svg class="quiz-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                            <circle cx="50" cy="50" r="28" fill="#1f3a4b" stroke="#b0d0f0" stroke-width="1.5" />
+                            <circle cx="50" cy="50" r="14" fill="#c67b3d" />
+                            <circle cx="42" cy="42" r="4" fill="#e8c99b" />
+                            <circle cx="58" cy="44" r="3" fill="#e8c99b" />
+                            <circle cx="50" cy="58" r="4" fill="#e8c99b" />
+                            <circle cx="34" cy="58" r="3" fill="#e8c99b" />
+                            <circle cx="66" cy="54" r="3" fill="#e8c99b" />
+                            <text x="42" y="86" font-size="8" fill="#b0d0f0" font-family="monospace">🪐</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-1 m-md-3">
+                        <h5 class="card-title">Astronomy Basics</h5>
+                        <div class="question-counter">Question 3 of 5</div>
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <p class="card-text">What distinguishes a planet from a dwarf planet?</p>
+                        <div class="quiz-options" id="options-q3">
+                            <div class="option-card" onclick="selectOption('q3', '1')" data-question="q3" data-value="1">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Size</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q3', '2')" data-question="q3" data-value="2">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Presence of moon</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q3', '3')" data-question="q3" data-value="3">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Orbiting the sun</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q3', '4')" data-question="q3" data-value="4">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Clearing its orbital path</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="btn-group-wrap">
+                            <button class="btn btn-primary" id="checkAnswer3">Check Answer</button>
+                            <button class="btn btn-primary" id="nextQ3" style="display: none;">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5 mx-2 mx-md-5" id="q4" style="display: none;">
+            <div class="row m-3 align-items-center">
+                <div class="col-md-3 text-center my-2">
+                    <div class="quiz-icon-wrap">
+                        <svg class="quiz-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                            <rect x="24" y="30" width="52" height="40" rx="4" fill="#1a3a5a" stroke="#b0d0f0" stroke-width="2" />
+                            <circle cx="50" cy="50" r="10" fill="#4ab3ff" />
+                            <rect x="36" y="20" width="28" height="10" fill="#2a4a6a" stroke="#b0d0f0" stroke-width="1.5" />
+                            <rect x="44" y="14" width="12" height="6" fill="#3a5a7a" stroke="#b0d0f0" stroke-width="1.5" />
+                            <text x="42" y="86" font-size="8" fill="#b0d0f0" font-family="monospace">🔭</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-1 m-md-3">
+                        <h5 class="card-title">Astronomy Basics</h5>
+                        <div class="question-counter">Question 4 of 5</div>
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <p class="card-text">What is the Hubble Space Telescope's main purpose?</p>
+                        <div class="quiz-options" id="options-q4">
+                            <div class="option-card" onclick="selectOption('q4', '1')" data-question="q4" data-value="1">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Studying earth's climate</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q4', '2')" data-question="q4" data-value="2">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Tracking asteroids</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q4', '3')" data-question="q4" data-value="3">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Mapping ocean currents</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q4', '4')" data-question="q4" data-value="4">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Observing distant galaxies</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="btn-group-wrap">
+                            <button class="btn btn-primary" id="checkAnswer4">Check Answer</button>
+                            <button class="btn btn-primary" id="nextQ4" style="display: none;">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5 mx-2 mx-md-5" id="q5" style="display: none;">
+            <div class="row m-3 align-items-center">
+                <div class="col-md-3 text-center my-2">
+                    <div class="quiz-icon-wrap">
+                        <svg class="quiz-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="44" stroke="#b0d0f0" stroke-width="2" fill="#0a1a2a" />
+                            <circle cx="46" cy="48" r="18" fill="#2a4a6a" stroke="#b0d8ff" stroke-width="2" />
+                            <ellipse cx="46" cy="48" rx="12" ry="10" fill="#d4e8ff" opacity="0.6" />
+                            <path d="M60 42 L90 30 L82 44 L96 52 L78 54 L88 68 L66 58 L60 42" fill="#b8d8ff" opacity="0.7" />
+                            <circle cx="46" cy="48" r="5" fill="#ffecb3" />
+                            <text x="42" y="86" font-size="8" fill="#b0d0f0" font-family="monospace">☄️</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-1 m-md-3">
+                        <h5 class="card-title">Astronomy Basics</h5>
+                        <div class="question-counter">Question 5 of 5</div>
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <p class="card-text">What causes a comet to develop a glowing tail near the Sun?</p>
+                        <div class="quiz-options" id="options-q5">
+                            <div class="option-card" onclick="selectOption('q5', '1')" data-question="q5" data-value="1">
+                                <span class="option-letter">A</span>
+                                <span class="option-text">Solar wind</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q5', '2')" data-question="q5" data-value="2">
+                                <span class="option-letter">B</span>
+                                <span class="option-text">Ionization of its nucleus</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q5', '3')" data-question="q5" data-value="3">
+                                <span class="option-letter">C</span>
+                                <span class="option-text">Collision with asteroids</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                            <div class="option-card" onclick="selectOption('q5', '4')" data-question="q5" data-value="4">
+                                <span class="option-letter">D</span>
+                                <span class="option-text">Interaction with cosmic rays</span>
+                                <span class="result-icon correct-icon"><i class="fas fa-check-circle"></i></span>
+                                <span class="result-icon wrong-icon"><i class="fas fa-times-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="btn-group-wrap">
+                            <button class="btn btn-primary" id="checkAnswer5">Check Answer</button>
+                            <button class="btn btn-primary" id="finishQuiz" style="display: none;">See Results 🎉</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5 mx-2 mx-md-5" id="Finish" style="display: none;">
+            <div class="row m-3 align-items-center">
+                <div class="col-md-3 text-center my-2">
+                    <div class="quiz-icon-wrap">
+                        <svg class="quiz-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="44" stroke="#ffd700" stroke-width="2" fill="#0a1a2a" />
+                            <circle cx="50" cy="50" r="20" fill="#ffd700" />
+                            <text x="38" y="56" font-size="24" fill="#0a1a2a" font-family="monospace">★</text>
+                            <circle cx="30" cy="26" r="4" fill="#ffd700" />
+                            <circle cx="70" cy="30" r="4" fill="#ffd700" />
+                            <circle cx="20" cy="60" r="3" fill="#ffd700" />
+                            <circle cx="80" cy="58" r="3" fill="#ffd700" />
+                            <circle cx="42" cy="76" r="4" fill="#ffd700" />
+                            <circle cx="62" cy="74" r="3" fill="#ffd700" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body m-1 m-md-3">
+                        <h5 class="card-title">Quiz Complete! 🎉</h5>
+                        <h6>Your Score: <span id="finalScore"></span> / 5</h6>
+                        <div class="d-flex justify-content-center my-3">
+                            <img src="https://i.gifer.com/origin/89/8958b6bbe4b087c03e72869322c91f68_w200.gif" alt="Congratulations" style="max-width: 100%; height: auto;">
+                        </div>
+                        <div class="btn-group-wrap">
+                            <button class="btn btn-primary" id="home"><i class="fa fa-home"></i> Home</button>
+                            <button class="btn btn-secondary" id="reviewQuiz">Review Answers</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Container -->
+        <div class="result m-3" style="display: none;">
+            <div class="alert" id="resultMessage"></div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Global variables
+        var score = 0;
+        var currentQuestion = 1;
+        var totalQuestions = 5;
+        var answers = {
+            q1: { correct: '1', selected: null },
+            q2: { correct: '4', selected: null },
+            q3: { correct: '4', selected: null },
+            q4: { correct: '4', selected: null },
+            q5: { correct: '2', selected: null }
+        };
+        var questionAnswered = false;
+
+        function selectOption(questionId, value) {
+            if (questionAnswered) return;
+            
+            // Remove selected class from all options in this question
+            var optionsContainer = document.getElementById('options-' + questionId);
+            var options = optionsContainer.querySelectorAll('.option-card');
+            options.forEach(function(opt) {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            var selectedOption = event.currentTarget;
+            selectedOption.classList.add('selected');
+            
+            // Store selected answer
+            answers[questionId].selected = value;
+        }
+
+        function checkAnswer(questionId, buttonId, nextButtonId, correctAnswer) {
+            var selected = answers[questionId].selected;
+            
+            if (!selected) {
+                $("#resultMessage").text("Please select an answer first!");
+                $("#resultMessage").removeClass("alert-success alert-danger").addClass("alert-warning");
+                $(".result").show();
+                return;
+            }
+            
+            questionAnswered = true;
+            
+            // Disable all options in this question
+            var optionsContainer = document.getElementById('options-' + questionId);
+            var options = optionsContainer.querySelectorAll('.option-card');
+            options.forEach(function(opt) {
+                opt.classList.add('disabled');
+            });
+            
+            // Highlight correct/wrong answers
+            options.forEach(function(opt) {
+                var value = opt.getAttribute('data-value');
+                if (value === correctAnswer) {
+                    opt.classList.add('correct');
+                    opt.querySelector('.correct-icon').style.display = 'block';
+                } else if (opt.classList.contains('selected') && value !== correctAnswer) {
+                    opt.classList.add('wrong');
+                    opt.querySelector('.wrong-icon').style.display = 'block';
+                }
+            });
+            
+            // Check if answer is correct
+            if (selected === correctAnswer) {
+                $("#resultMessage").text("✅ Correct! Well done!");
+                $("#resultMessage").removeClass("alert-danger alert-warning").addClass("alert-success");
+                score++;
+            } else {
+                $("#resultMessage").text("❌ Incorrect. The correct answer was: " + getCorrectAnswerText(questionId));
+                $("#resultMessage").removeClass("alert-success alert-warning").addClass("alert-danger");
+            }
+            
+            $(".result").show();
+            
+            // Show next button, hide check button
+            $("#" + buttonId).hide();
+            $("#" + nextButtonId).show();
+        }
+
+        function getCorrectAnswerText(questionId) {
+            var correctValue = answers[questionId].correct;
+            var labels = {
+                q1: { '1': 'Proxima Centauri', '2': 'Betelgeuse', '3': 'Sirius', '4': 'Alpha Centauri' },
+                q2: { '1': 'Revolution around the sun', '2': 'Axial tilt', '3': 'Gravitational pull', '4': 'Spin on its axis' },
+                q3: { '1': 'Size', '2': 'Presence of moon', '3': 'Orbiting the sun', '4': 'Clearing its orbital path' },
+                q4: { '1': 'Studying earth\'s climate', '2': 'Tracking asteroids', '3': 'Mapping ocean currents', '4': 'Observing distant galaxies' },
+                q5: { '1': 'Solar wind', '2': 'Ionization of its nucleus', '3': 'Collision with asteroids', '4': 'Interaction with cosmic rays' }
+            };
+            return labels[questionId][correctValue];
+        }
+
+        function nextQuestion(nextQuestionId, currentQuestionId) {
+            $("#" + currentQuestionId).hide();
+            $("#" + nextQuestionId).show();
+            $(".result").hide();
+            questionAnswered = false;
+        }
+
+        function initDropdowns(root) {
+            const toggles = root.querySelectorAll('.nav-item.dropdown > .dropdown-toggle');
+
+            function closeAll(except) {
+                root.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                    if (menu === except) return;
+                    menu.classList.remove('show');
+                    const t = menu.previousElementSibling;
+                    if (t) t.setAttribute('aria-expanded', 'false');
+                });
+            }
+
+            toggles.forEach(function(toggle) {
+                const menu = toggle.nextElementSibling;
+                if (!menu || !menu.classList.contains('dropdown-menu')) return;
+
+                menu.style.position = 'fixed';
+                menu.style.margin = '0';
+                menu.style.zIndex = '99999';
+
+                function positionMenu() {
+                    const rect = toggle.getBoundingClientRect();
+                    menu.style.top = rect.bottom + 'px';
+                    menu.style.left = rect.left + 'px';
+                }
+
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isOpen = menu.classList.contains('show');
+                    closeAll(isOpen ? null : menu);
+                    if (!isOpen) positionMenu();
+                    menu.classList.toggle('show', !isOpen);
+                    toggle.setAttribute('aria-expanded', String(!isOpen));
+                });
+
+                window.addEventListener('resize', function() {
+                    if (menu.classList.contains('show')) positionMenu();
+                });
+                window.addEventListener('scroll', function() {
+                    if (menu.classList.contains('show')) positionMenu();
+                }, true);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!root.contains(e.target)) closeAll();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeAll();
+            });
+        }
+
+        $(document).ready(function() {
+            // Load Header
+            const placeholder = document.getElementById('navbar-placeholder');
+            $("#navbar-placeholder").load("../../includes/header.html", function(response, status, xhr) {
+                if (status == "error") {
+                    console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
+                    $("#navbar-placeholder").html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
+                    return;
+                }
+                initDropdowns(placeholder);
+            });
+
+            // Load Footer
+            $("#footer-placeholder").load("../../includes/footer.html", function(response, status, xhr) {
+                if (status == "error") {
+                    console.log("Error loading footer: " + xhr.status + " " + xhr.statusText);
+                    $("#footer-placeholder").html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+                }
+            });
+
+            // Question 1
+            $("#checkAnswer1").click(function() {
+                checkAnswer('q1', 'checkAnswer1', 'nextQ1', '1');
+            });
+            $("#nextQ1").click(function() {
+                nextQuestion('q2', 'q1');
+            });
+
+            // Question 2
+            $("#checkAnswer2").click(function() {
+                checkAnswer('q2', 'checkAnswer2', 'nextQ2', '4');
+            });
+            $("#nextQ2").click(function() {
+                nextQuestion('q3', 'q2');
+            });
+
+            // Question 3
+            $("#checkAnswer3").click(function() {
+                checkAnswer('q3', 'checkAnswer3', 'nextQ3', '4');
+            });
+            $("#nextQ3").click(function() {
+                nextQuestion('q4', 'q3');
+            });
+
+            // Question 4
+            $("#checkAnswer4").click(function() {
+                checkAnswer('q4', 'checkAnswer4', 'nextQ4', '4');
+            });
+            $("#nextQ4").click(function() {
+                nextQuestion('q5', 'q4');
+            });
+
+            // Question 5
+            $("#checkAnswer5").click(function() {
+                checkAnswer('q5', 'checkAnswer5', 'finishQuiz', '2');
+            });
+            $("#finishQuiz").click(function() {
+                $("#q5").hide();
+                $(".result").hide();
+                $("#Finish").show();
+                $("#finalScore").text(score);
+            });
+
+            // Home button
+            $("#home").click(function() {
+                window.location.href = "../../index.html";
+            });
+
+            // Review button - reset everything
+            $("#reviewQuiz").click(function() {
+                // Reset all questions
+                $("#Finish").hide();
+                $("#q1").show();
+                $("#q2").hide();
+                $("#q3").hide();
+                $("#q4").hide();
+                $("#q5").hide();
+                
+                // Reset variables
+                score = 0;
+                questionAnswered = false;
+                
+                // Reset all option cards
+                $('.option-card').removeClass('selected correct wrong disabled');
+                $('.result-icon').css('display', 'none');
+                
+                // Reset buttons
+                $("#checkAnswer1").show();
+                $("#nextQ1").hide();
+                $("#checkAnswer2").show();
+                $("#nextQ2").hide();
+                $("#checkAnswer3").show();
+                $("#nextQ3").hide();
+                $("#checkAnswer4").show();
+                $("#nextQ4").hide();
+                $("#checkAnswer5").show();
+                $("#finishQuiz").hide();
+                
+                // Reset result
+                $(".result").hide();
+                $("#resultMessage").removeClass("alert-success alert-danger alert-warning").text("");
+                
+                // Reset answers
+                for (var q in answers) {
+                    answers[q].selected = null;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
