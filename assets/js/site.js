@@ -1,5 +1,4 @@
-// Favicon — injected here since header.html loads into <body>, not <head>,
-// so a <link rel="icon"> placed in the partial itself wouldn't be honored.
+// Favicon — injected here since header.html loads into <body>, not <head>
 (function () {
     // DETECT ENVIRONMENT
     const isGitHubPages = window.location.hostname.includes('github.io');
@@ -70,11 +69,7 @@ function initDropdowns(root) {
     });
 }
 
-// ===== FUNCTION TO FIX ROOT-RELATIVE PATHS IN AN INJECTED PARTIAL =====
-// Works for both header.html and footer.html — rewrites any href/src that
-// starts with "/" (root-relative) so it resolves correctly whether the site
-// is served from the domain root (local/custom domain) or from a GitHub
-// Pages project subpath (e.g. /Solarscapes/).
+// ===== FUNCTION TO FIX ROOT-RELATIVE PATHS =====
 function fixIncludePaths(root) {
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
@@ -83,13 +78,9 @@ function fixIncludePaths(root) {
     function rewrite(el, attr) {
         let value = el.getAttribute(attr);
         if (!value || value === '#' || value.startsWith('#')) return;
-        // Only touch root-relative paths (leave http(s)://, mailto:, etc. alone)
         if (!value.startsWith('/')) return;
 
-        // Strip any existing /Solarscapes prefix so this is safe to run
-        // multiple times / on already-fixed markup without doubling up.
         value = value.replace(new RegExp('^/' + repoName + '(?=/|$)'), '');
-
         el.setAttribute(attr, basePath + value);
     }
 
@@ -102,34 +93,66 @@ function fixIncludePaths(root) {
 }
 
 $(document).ready(function () {
-    // Detect environment for loading
+    // DETECT ENVIRONMENT
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
 
+    // ===== CRITICAL FIX: Determine the correct path to includes =====
+    // Get the current page path and calculate how many levels deep we are
+    const pathname = window.location.pathname;
+    let relativePath = '';
+    
+    // Check if we're in a subfolder
+    if (pathname.includes('/pages/learning/')) {
+        relativePath = '../../';
+    } else if (pathname.includes('/pages/main/')) {
+        relativePath = '../../';
+    } else if (pathname.includes('/pages/tools/')) {
+        relativePath = '../../';
+    } else if (pathname.includes('/pages/')) {
+        relativePath = '../';
+    } else {
+        relativePath = './';
+    }
+
+    // For GitHub Pages, we need to handle the subpath differently
+    // If on GitHub Pages, the basePath already includes /Solarscapes/
+    const headerPath = isGitHubPages 
+        ? basePath + '/includes/header.html'  // GitHub: /Solarscapes/includes/header.html
+        : relativePath + 'includes/header.html'; // Local: ../../includes/header.html
+
+    const footerPath = isGitHubPages
+        ? basePath + '/includes/footer.html'
+        : relativePath + 'includes/footer.html';
+
     const navPlaceholder = document.getElementById('navbar-placeholder');
     const footerPlaceholder = document.getElementById('footer-placeholder');
 
-    // Load header — absolute path, resolves the same from any folder depth
-    $('#navbar-placeholder').load(basePath + '/includes/header.html', function (response, status, xhr) {
-        if (status === 'error') {
-            console.log('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
-            $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
-            return;
-        }
+    // Load header
+    if (navPlaceholder) {
+        $(navPlaceholder).load(headerPath, function (response, status, xhr) {
+            if (status === 'error') {
+                console.log('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
+                console.log('Tried to load from: ' + headerPath);
+                $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
+                return;
+            }
+            fixIncludePaths(navPlaceholder);
+            initDropdowns(navPlaceholder);
+        });
+    }
 
-        fixIncludePaths(navPlaceholder);
-        initDropdowns(navPlaceholder);
-    });
-
-    // Load footer — same approach
-    $('#footer-placeholder').load(basePath + '/includes/footer.html', function (response, status, xhr) {
-        if (status === 'error') {
-            console.log('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
-            $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
-            return;
-        }
-
-        fixIncludePaths(footerPlaceholder);
-    });
+    // Load footer
+    if (footerPlaceholder) {
+        $(footerPlaceholder).load(footerPath, function (response, status, xhr) {
+            if (status === 'error') {
+                console.log('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
+                console.log('Tried to load from: ' + footerPath);
+                $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+                return;
+            }
+            fixIncludePaths(footerPlaceholder);
+        });
+    }
 });
