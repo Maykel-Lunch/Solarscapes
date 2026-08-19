@@ -1,6 +1,6 @@
 /**
  * ============================================
- * SITE CONFIGURATION - Everything in one file
+ * SITE CONFIGURATION
  * ============================================
  */
 const APP = (function() {
@@ -89,6 +89,7 @@ function fixIncludePaths(root) {
     const basePath = APP.BASE_URL;
     
     console.log('🔧 Fixing paths in loaded content...');
+    console.log('  Root element:', root);
     
     function rewrite(el, attr) {
         let value = el.getAttribute(attr);
@@ -98,12 +99,17 @@ function fixIncludePaths(root) {
         
         const original = value;
         
-        // Clean the path
-        value = value.replace(/^\/Solarscapes\//, '/');
-        value = value.replace(/^\/Solarscapes$/, '/');
-        value = value.replace(/^Solarscapes\//, '/');
+        // If path already has /Solarscapes/, remove it
+        if (value.startsWith('/Solarscapes/')) {
+            value = value.replace('/Solarscapes', '');
+        }
         
-        // Make it root-relative
+        // If path starts with Solarscapes/ (no slash), remove it
+        if (value.startsWith('Solarscapes/')) {
+            value = value.replace('Solarscapes', '');
+        }
+        
+        // Make sure it starts with /
         if (!value.startsWith('/')) {
             value = '/' + value;
         }
@@ -120,8 +126,15 @@ function fixIncludePaths(root) {
         el.setAttribute(attr, value);
     }
     
-    root.querySelectorAll('[href]').forEach(el => rewrite(el, 'href'));
-    root.querySelectorAll('[src]').forEach(el => rewrite(el, 'src'));
+    // Fix ALL links - including dropdown items
+    const allLinks = root.querySelectorAll('a[href]');
+    console.log('  Found', allLinks.length, 'links to fix');
+    allLinks.forEach(el => rewrite(el, 'href'));
+    
+    // Fix ALL images
+    const allImages = root.querySelectorAll('img[src]');
+    console.log('  Found', allImages.length, 'images to fix');
+    allImages.forEach(el => rewrite(el, 'src'));
 }
 
 /**
@@ -156,18 +169,32 @@ $(document).ready(function () {
     console.log('📄 Loading header from:', headerPath);
     console.log('📄 Loading footer from:', footerPath);
     
+    // Check if elements exist
+    if ($('#navbar-placeholder').length === 0) {
+        console.error('❌ navbar-placeholder element not found!');
+    }
+    if ($('#footer-placeholder').length === 0) {
+        console.error('❌ footer-placeholder element not found!');
+    }
+    
     // Load header
     $('#navbar-placeholder').load(headerPath, function(response, status, xhr) {
         if (status === 'error') {
             console.error('❌ Error loading header:', xhr.status, xhr.statusText);
+            console.error('❌ Tried to load from:', headerPath);
             $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
             return;
         }
         console.log('✅ Header loaded successfully!');
+        console.log('📄 Header content length:', response.length, 'characters');
+        
         const navPlaceholder = document.getElementById('navbar-placeholder');
         if (navPlaceholder) {
+            console.log('🔧 Fixing header paths...');
             fixIncludePaths(navPlaceholder);
+            console.log('🔧 Initializing dropdowns...');
             initDropdowns(navPlaceholder);
+            console.log('✅ Header setup complete!');
         }
     });
     
@@ -175,12 +202,14 @@ $(document).ready(function () {
     $('#footer-placeholder').load(footerPath, function(response, status, xhr) {
         if (status === 'error') {
             console.error('❌ Error loading footer:', xhr.status, xhr.statusText);
+            console.error('❌ Tried to load from:', footerPath);
             $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
             return;
         }
         console.log('✅ Footer loaded successfully!');
         const footerPlaceholder = document.getElementById('footer-placeholder');
         if (footerPlaceholder) {
+            console.log('🔧 Fixing footer paths...');
             fixIncludePaths(footerPlaceholder);
         }
     });
