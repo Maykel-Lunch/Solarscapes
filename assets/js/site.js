@@ -1,17 +1,20 @@
 // Favicon — injected here since header.html loads into <body>, not <head>,
 // so a <link rel="icon"> placed in the partial itself wouldn't be honored.
 (function () {
-    const basePath = window.location.pathname.indexOf('/pages/') !== -1 ? '../../' : '';
-
+    // DETECT ENVIRONMENT
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const repoName = 'Solarscapes';
+    const basePath = isGitHubPages ? '/' + repoName : '';
+    
     const icon = document.createElement('link');
     icon.rel = 'icon';
     icon.type = 'image/png';
-    icon.href = basePath + 'assets/img/Logo.png';
+    icon.href = basePath + '/assets/img/Logo.png';
     document.head.appendChild(icon);
 
     const appleIcon = document.createElement('link');
     appleIcon.rel = 'apple-touch-icon';
-    appleIcon.href = basePath + 'assets/img/Logo.png';
+    appleIcon.href = basePath + '/assets/img/Logo.png';
     document.head.appendChild(appleIcon);
 })();
 
@@ -67,20 +70,73 @@ function initDropdowns(root) {
     });
 }
 
-$(document).ready(function () {
-    const placeholder = document.getElementById('navbar-placeholder');
-    const basePath = window.location.pathname.indexOf('/pages/') !== -1 ? '../../' : '';
+// ===== NEW: FUNCTION TO FIX PATHS IN HEADER =====
+function fixHeaderPaths(root) {
+    // Detect environment
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const repoName = 'Solarscapes';
+    const basePath = isGitHubPages ? '/' + repoName : '';
+    
+    // Fix logo image
+    const logo = root.querySelector('.logo');
+    if (logo) {
+        let src = logo.getAttribute('src');
+        // Remove any existing /Solarscapes/ prefix (if any)
+        src = src.replace(/^\/Solarscapes/, '');
+        // Add correct base path
+        logo.src = basePath + src;
+    }
+    
+    // Fix navbar brand link
+    const brand = root.querySelector('.navbar-brand');
+    if (brand) {
+        let href = brand.getAttribute('href');
+        href = href.replace(/^\/Solarscapes/, '');
+        brand.href = basePath + href;
+    }
+    
+    // Fix all dropdown links and nav links
+    root.querySelectorAll('.dropdown-item, .nav-link[href^="/"]').forEach(function(link) {
+        let href = link.getAttribute('href');
+        // Skip if it's just "#" or empty
+        if (!href || href === '#' || href.startsWith('#')) return;
+        
+        // Remove any existing /Solarscapes/ prefix
+        href = href.replace(/^\/Solarscapes/, '');
+        // Add correct base path
+        link.href = basePath + href;
+    });
+}
 
-    $('#navbar-placeholder').load(basePath + 'includes/header.html', function (response, status, xhr) {
+$(document).ready(function () {
+    // Detect environment for loading
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const repoName = 'Solarscapes';
+    
+    // Determine relative path for loading includes
+    // This detects if we're in a subfolder (pages/learning/, pages/main/, etc.)
+    const pathDepth = window.location.pathname.split('/').filter(p => p && p !== repoName).length;
+    const relativePath = pathDepth > 0 ? '../'.repeat(pathDepth) : './';
+    
+    const placeholder = document.getElementById('navbar-placeholder');
+
+    // Load header
+    $('#navbar-placeholder').load(relativePath + 'includes/header.html', function (response, status, xhr) {
         if (status === 'error') {
             console.log('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
             $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
             return;
         }
+        
+        // Initialize dropdowns
         initDropdowns(placeholder);
+        
+        // ===== NEW: FIX ALL PATHS in the header =====
+        fixHeaderPaths(placeholder);
     });
 
-    $('#footer-placeholder').load(basePath + 'includes/footer.html', function (response, status, xhr) {
+    // Load footer
+    $('#footer-placeholder').load(relativePath + 'includes/footer.html', function (response, status, xhr) {
         if (status === 'error') {
             console.log('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
             $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
