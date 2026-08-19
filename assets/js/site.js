@@ -81,6 +81,60 @@ function initDropdowns(root) {
 
 /**
  * ============================================
+ * FIX PATHS IN LOADED CONTENT
+ * ============================================
+ */
+function fixIncludePaths(root) {
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    const repoName = 'Solarscapes';
+    const basePath = isGitHubPages ? '/' + repoName : '';
+    
+    console.log('🔧 Fixing paths in loaded content...');
+    console.log('  Base path:', basePath || '/');
+    
+    function rewrite(el, attr) {
+        let value = el.getAttribute(attr);
+        if (!value || value === '#' || value.startsWith('#')) return;
+        if (value.startsWith('http') || value.startsWith('mailto') || value.startsWith('tel')) return;
+        if (value.startsWith('data:')) return;
+        
+        const original = value;
+        
+        // Clean the path - remove any /Solarscapes/ prefix
+        value = value.replace(/^\/Solarscapes\//, '/');
+        value = value.replace(/^\/Solarscapes$/, '/');
+        value = value.replace(/^Solarscapes\//, '/');
+        
+        // Make it root-relative
+        if (!value.startsWith('/')) {
+            value = '/' + value;
+        }
+        
+        // Add base path if in production (GitHub Pages)
+        if (isGitHubPages) {
+            value = basePath + value;
+        }
+        
+        if (original !== value) {
+            console.log('  ✏️  Fixed:', original, '→', value);
+        }
+        
+        el.setAttribute(attr, value);
+    }
+    
+    // Fix ALL links
+    const allLinks = root.querySelectorAll('[href]');
+    console.log('  Found', allLinks.length, 'links to fix');
+    allLinks.forEach(el => rewrite(el, 'href'));
+    
+    // Fix ALL images
+    const allImages = root.querySelectorAll('[src]');
+    console.log('  Found', allImages.length, 'images to fix');
+    allImages.forEach(el => rewrite(el, 'src'));
+}
+
+/**
+ * ============================================
  * FAVICON INJECTION
  * ============================================
  */
@@ -122,22 +176,34 @@ $(document).ready(function () {
     const footerPath = depth + 'includes/footer.html';
     
     console.log('📄 Loading header from:', headerPath);
+    console.log('📄 Loading footer from:', footerPath);
     
+    // Load header
     $('#navbar-placeholder').load(headerPath, function(response, status, xhr) {
         if (status === 'error') {
-            console.error('❌ Error loading header:', xhr.status);
-            $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation.</div>');
+            console.error('❌ Error loading header:', xhr.status, xhr.statusText);
+            $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
             return;
         }
-        console.log('✅ Header loaded!');
-        initDropdowns(document.getElementById('navbar-placeholder'));
+        console.log('✅ Header loaded successfully!');
+        const navPlaceholder = document.getElementById('navbar-placeholder');
+        if (navPlaceholder) {
+            fixIncludePaths(navPlaceholder);
+            initDropdowns(navPlaceholder);
+        }
     });
     
+    // Load footer
     $('#footer-placeholder').load(footerPath, function(response, status, xhr) {
         if (status === 'error') {
-            console.error('❌ Error loading footer:', xhr.status);
+            console.error('❌ Error loading footer:', xhr.status, xhr.statusText);
+            $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
             return;
         }
-        console.log('✅ Footer loaded!');
+        console.log('✅ Footer loaded successfully!');
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            fixIncludePaths(footerPlaceholder);
+        }
     });
 });
