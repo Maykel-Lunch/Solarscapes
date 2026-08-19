@@ -1,0 +1,95 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Press Start 2P', serif;
+    font-weight: 100;
+    font-size: 15px;
+    background-image: url('../img/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#navbar-placeholder {
+    position: relative;
+    z-index: 1050;
+}
+
+#navbar-placeholder .navbar,
+#navbar-placeholder .navbar-collapse,
+#navbar-placeholder .nav-item.dropdown {
+    overflow: visible;
+}
+
+#navbar-placeholder .dropdown-menu {
+    z-index: 1051;
+}
+
+#navbar-placeholder .dropdown-menu.show {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 12rem !important;
+}
+
+#navbar-placeholder .dropdown-menu.show > li,
+#navbar-placeholder .dropdown-menu.show > li > .dropdown-item {
+    display: block !important;
+    width: 100% !important;
+}
+
+#footer-placeholder {
+    margin-top: auto;
+}
+
+#footer-placeholder footer {
+    width: 100%;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+}
+
+.card {
+    background: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    color: #f5fffa;
+}
+
+footer.bg-dark {
+    background-color: #212529 !important;
+}
+
+footer a {
+    color: #f8f9fa;
+}
+
+footer a:hover {
+    color: #adb5bd;
+}
+
+.btn-primary {
+    background: #0d6efd;
+    border: 1px solid #0d6efd;
+}
+
+.btn-primary:hover {
+    background: #0b5ed7;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 12px;
+    }
+}

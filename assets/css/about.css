@@ -1,0 +1,58 @@
+.main-card {
+    background: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    color: #f5fffa;
+}
+
+.section-box {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 1.8rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-box:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 20px rgba(100, 200, 255, 0.05);
+}
+
+.section-box h5 {
+    color: #b3e4ff;
+    text-shadow: 0 0 8px rgba(0, 180, 255, 0.3);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.section-box p,
+.section-box li {
+    color: #f0f8ff;
+    line-height: 1.8;
+    font-size: 0.82rem;
+}
+
+.section-box ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.section-box ul li {
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.section-box ul li:last-child { border-bottom: none; }
+.section-box ul li::before { content: "▹ "; color: #b3e4ff; }
+.btn-outline-primary { color: #b3e4ff; border-color: #4ab3ff; }
+.btn-outline-primary:hover { background: #1a4a7a; border-color: #8fcbff; }
+
+@media (max-width: 768px) {
+    .section-box { padding: 1rem 1.2rem; }
+    .section-box p, .section-box li { font-size: 0.72rem; }
+    .section-box h5 { font-size: 0.78rem; }
+}

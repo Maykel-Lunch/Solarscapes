@@ -9,7 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
-    <style>
+    <link rel="stylesheet" href="../../assets/css/site.css">
+    <link rel="stylesheet" href="../../assets/css/learning.css">
+    <!--
         body {
             font-family: 'Press Start 2P', serif;
             font-weight: bold;
@@ -143,7 +145,7 @@
         .card-title {
             text-shadow: 0 0 8px rgba(0, 180, 255, 0.4);
         }
-    </style>
+    -->
 </head>
 
 <body>
@@ -161,7 +163,7 @@
 
                     <!-- Item 1: Asteroids (SVG) -->
                     <div class="carousel-item active">
-                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="card mt-3">
                             <div class="row m-3 align-items-center">
                                 <div class="col-md-3 text-center my-2">
                                     <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -186,7 +188,7 @@
 
                     <!-- Item 2: Comets (SVG) -->
                     <div class="carousel-item">
-                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="card mt-3">
                             <div class="row m-3 align-items-center">
                                 <div class="col-md-3 text-center my-2">
                                     <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -209,7 +211,7 @@
 
                     <!-- Item 3: Planets (SVG) -->
                     <div class="carousel-item">
-                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="card mt-3">
                             <div class="row m-3 align-items-center">
                                 <div class="col-md-3 text-center my-2">
                                     <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -235,7 +237,7 @@
 
                     <!-- Item 4: Satellites and Moons (SVG) -->
                     <div class="carousel-item">
-                        <div class="card mt-3" style="box-shadow: 0 0 10px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); backdrop-filter: blur(20px);">
+                            <div class="card mt-3">
                             <div class="row m-3 align-items-center">
                                 <div class="col-md-3 text-center my-2">
                                     <svg class="topic-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -278,7 +280,7 @@
             <!-- bottom gif and buttons (kept as original) -->
             <div class="d-flex justify-content-center mt-5">
                 <img src="https://cdna.artstation.com/p/assets/images/images/050/392/912/original/nelson-tiapa-gif-con-telefono.gif?1654734490"
-                    style="width: 200px;" alt="space gif">
+                    class="footer-gif" alt="space gif">
             </div>
             <div class="d-flex justify-content-between">
                 <a href="../../index.html" class="btn btn-outline-primary mt-3"><i class="fa fa-home"></i> Home</a>
@@ -293,6 +295,7 @@
 
     <!-- Load jQuery and load the header -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../assets/js/site.js"></script>
     <script>
         function initDropdowns(root) {
             const toggles = root.querySelectorAll('.nav-item.dropdown > .dropdown-toggle');

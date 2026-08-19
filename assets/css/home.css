@@ -1,0 +1,34 @@
+.card {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#carouselExampleIndicators2 .card,
+#carouselExampleIndicators2 .carousel-item {
+    height: 100%;
+}
+
+#carouselExampleIndicators2 .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.saturn-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.saturn-svg {
+    width: 160px;
+    height: 160px;
+    overflow: visible;
+    shape-rendering: crispEdges;
+    image-rendering: pixelated;
+    animation: float-saturn 4s ease-in-out infinite;
+}
+
+@keyframes float-saturn {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}

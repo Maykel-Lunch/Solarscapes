@@ -1,0 +1,18 @@
+.container-fluid { padding: 0 100px; }
+.card { background: transparent; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(20px); color: #f5fffa; }
+.card-title { text-shadow: 0 0 8px rgba(0, 180, 255, 0.4); }
+.topic-icon { width: 160px; height: 160px; filter: drop-shadow(0 0 12px rgba(100, 200, 255, 0.3)); transition: 0.3s; display: block; margin: 0 auto; }
+.topic-icon:hover { filter: drop-shadow(0 0 28px #8fcbff); transform: scale(1.02); }
+.carousel-control-prev-icon, .carousel-control-next-icon { background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; padding: 20px; background-size: 60%; }
+.btn-outline-primary { color: #b3e4ff; border-color: #4ab3ff; }
+.btn-outline-primary:hover { background: #1a4a7a; border-color: #8fcbff; }
+.btn-success { background: #198754; border: 1px solid #198754; }
+.btn-success:hover { background: #157347; }
+.carousel-item .card { min-height: 280px; }
+.constellation-card, .bio-card { margin: 15px 0; padding: 15px; }
+.astronomer-img { width: 160px; height: 160px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255,255,255,.3); box-shadow: 0 0 20px rgba(100,200,255,.2); display: block; margin: 0 auto; background: #1a2a3a; }
+.astronomer-img:hover { transform: scale(1.03); box-shadow: 0 0 35px rgba(100,200,255,.4); }
+.standard-img { height: 220px; width: 220px; object-fit: cover; border-radius: 10px; }
+.footer-gif { width: 200px; }
+.progress-bar { background-color: #4ab3ff; }
+@media (max-width: 768px) { .container-fluid { padding: 0 20px; } .topic-icon { width: 110px; height: 110px; } .astronomer-img { width: 120px; height: 120px; } }

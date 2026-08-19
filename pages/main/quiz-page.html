@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto+Mono&family=Share+Tech+Mono&family=Audiowide&family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="../../assets/css/site.css">
+    <link rel="stylesheet" href="../../assets/css/quiz.css">
     <title>Quiz Page: Solarscapes</title>
-    <style>
+    <!--
         body {
             font-family: 'Press Start 2P', serif;
             font-weight: bold;
@@ -446,7 +448,7 @@
             display: block;
             color: #dc3545;
         }
-    </style>
+    -->
 </head>
 
 <body>
@@ -480,7 +482,7 @@
                         <div class="question-counter">Question 1 of 5</div>
                         <div class="progress-container">
                             <div class="progress">
-                                <div class="progress-bar" style="width: 20%;"></div>
+                                <div class="progress-bar progress-width-20"></div>
                             </div>
                         </div>
                         <p class="card-text">What is the name of the closest star to Earth?</p>
@@ -512,14 +514,14 @@
                         </div>
                         <div class="btn-group-wrap">
                             <button class="btn btn-primary" id="checkAnswer1">Check Answer</button>
-                            <button class="btn btn-primary" id="nextQ1" style="display: none;">Next Question →</button>
+                            <button class="btn btn-primary is-hidden" id="nextQ1">Next Question →</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-5 mx-2 mx-md-5" id="q2" style="display: none;">
+        <div class="card mt-5 mx-2 mx-md-5 is-hidden" id="q2">
             <div class="row m-3 align-items-center">
                 <div class="col-md-3 text-center my-2">
                     <div class="quiz-icon-wrap">
@@ -539,7 +541,7 @@
                         <div class="question-counter">Question 2 of 5</div>
                         <div class="progress-container">
                             <div class="progress">
-                                <div class="progress-bar" style="width: 40%;"></div>
+                                <div class="progress-bar progress-width-40"></div>
                             </div>
                         </div>
                         <p class="card-text">How does Earth's rotation create day and night?</p>
@@ -571,14 +573,14 @@
                         </div>
                         <div class="btn-group-wrap">
                             <button class="btn btn-primary" id="checkAnswer2">Check Answer</button>
-                            <button class="btn btn-primary" id="nextQ2" style="display: none;">Next Question →</button>
+                            <button class="btn btn-primary is-hidden" id="nextQ2">Next Question →</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-5 mx-2 mx-md-5" id="q3" style="display: none;">
+        <div class="card mt-5 mx-2 mx-md-5 is-hidden" id="q3">
             <div class="row m-3 align-items-center">
                 <div class="col-md-3 text-center my-2">
                     <div class="quiz-icon-wrap">
@@ -601,7 +603,7 @@
                         <div class="question-counter">Question 3 of 5</div>
                         <div class="progress-container">
                             <div class="progress">
-                                <div class="progress-bar" style="width: 60%;"></div>
+                                <div class="progress-bar progress-width-60"></div>
                             </div>
                         </div>
                         <p class="card-text">What distinguishes a planet from a dwarf planet?</p>
@@ -633,14 +635,14 @@
                         </div>
                         <div class="btn-group-wrap">
                             <button class="btn btn-primary" id="checkAnswer3">Check Answer</button>
-                            <button class="btn btn-primary" id="nextQ3" style="display: none;">Next Question →</button>
+                            <button class="btn btn-primary is-hidden" id="nextQ3">Next Question →</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-5 mx-2 mx-md-5" id="q4" style="display: none;">
+        <div class="card mt-5 mx-2 mx-md-5 is-hidden" id="q4">
             <div class="row m-3 align-items-center">
                 <div class="col-md-3 text-center my-2">
                     <div class="quiz-icon-wrap">
@@ -660,7 +662,7 @@
                         <div class="question-counter">Question 4 of 5</div>
                         <div class="progress-container">
                             <div class="progress">
-                                <div class="progress-bar" style="width: 80%;"></div>
+                                <div class="progress-bar progress-width-80"></div>
                             </div>
                         </div>
                         <p class="card-text">What is the Hubble Space Telescope's main purpose?</p>
@@ -692,14 +694,14 @@
                         </div>
                         <div class="btn-group-wrap">
                             <button class="btn btn-primary" id="checkAnswer4">Check Answer</button>
-                            <button class="btn btn-primary" id="nextQ4" style="display: none;">Next Question →</button>
+                            <button class="btn btn-primary is-hidden" id="nextQ4">Next Question →</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-5 mx-2 mx-md-5" id="q5" style="display: none;">
+        <div class="card mt-5 mx-2 mx-md-5 is-hidden" id="q5">
             <div class="row m-3 align-items-center">
                 <div class="col-md-3 text-center my-2">
                     <div class="quiz-icon-wrap">
@@ -719,7 +721,7 @@
                         <div class="question-counter">Question 5 of 5</div>
                         <div class="progress-container">
                             <div class="progress">
-                                <div class="progress-bar" style="width: 100%;"></div>
+                                <div class="progress-bar progress-width-100"></div>
                             </div>
                         </div>
                         <p class="card-text">What causes a comet to develop a glowing tail near the Sun?</p>
@@ -751,14 +753,14 @@
                         </div>
                         <div class="btn-group-wrap">
                             <button class="btn btn-primary" id="checkAnswer5">Check Answer</button>
-                            <button class="btn btn-primary" id="finishQuiz" style="display: none;">See Results 🎉</button>
+                            <button class="btn btn-primary is-hidden" id="finishQuiz">See Results 🎉</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card mt-5 mx-2 mx-md-5" id="Finish" style="display: none;">
+        <div class="card mt-5 mx-2 mx-md-5 is-hidden" id="Finish">
             <div class="row m-3 align-items-center">
                 <div class="col-md-3 text-center my-2">
                     <div class="quiz-icon-wrap">
@@ -780,7 +782,7 @@
                         <h5 class="card-title">Quiz Complete! 🎉</h5>
                         <h6>Your Score: <span id="finalScore"></span> / 5</h6>
                         <div class="d-flex justify-content-center my-3">
-                            <img src="https://i.gifer.com/origin/89/8958b6bbe4b087c03e72869322c91f68_w200.gif" alt="Congratulations" style="max-width: 100%; height: auto;">
+                            <img class="quiz-result-gif" src="https://i.gifer.com/origin/89/8958b6bbe4b087c03e72869322c91f68_w200.gif" alt="Congratulations">
                         </div>
                         <div class="btn-group-wrap">
                             <button class="btn btn-primary" id="home"><i class="fa fa-home"></i> Home</button>
@@ -792,7 +794,7 @@
         </div>
 
         <!-- Result Container -->
-        <div class="result m-3" style="display: none;">
+        <div class="result m-3 is-hidden">
             <div class="alert" id="resultMessage"></div>
         </div>
     </div>
@@ -801,6 +803,7 @@
     <div id="footer-placeholder"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../assets/js/quiz.js"></script>
     <script>
         // Global variables
         var score = 0;
