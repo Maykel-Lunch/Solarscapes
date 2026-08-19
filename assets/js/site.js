@@ -5,7 +5,7 @@
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
-    
+
     const icon = document.createElement('link');
     icon.rel = 'icon';
     icon.type = 'image/png';
@@ -70,41 +70,34 @@ function initDropdowns(root) {
     });
 }
 
-// ===== NEW: FUNCTION TO FIX PATHS IN HEADER =====
-function fixHeaderPaths(root) {
-    // Detect environment
+// ===== FUNCTION TO FIX ROOT-RELATIVE PATHS IN AN INJECTED PARTIAL =====
+// Works for both header.html and footer.html — rewrites any href/src that
+// starts with "/" (root-relative) so it resolves correctly whether the site
+// is served from the domain root (local/custom domain) or from a GitHub
+// Pages project subpath (e.g. /Solarscapes/).
+function fixIncludePaths(root) {
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
     const basePath = isGitHubPages ? '/' + repoName : '';
-    
-    // Fix logo image
-    const logo = root.querySelector('.logo');
-    if (logo) {
-        let src = logo.getAttribute('src');
-        // Remove any existing /Solarscapes/ prefix (if any)
-        src = src.replace(/^\/Solarscapes/, '');
-        // Add correct base path
-        logo.src = basePath + src;
+
+    function rewrite(el, attr) {
+        let value = el.getAttribute(attr);
+        if (!value || value === '#' || value.startsWith('#')) return;
+        // Only touch root-relative paths (leave http(s)://, mailto:, etc. alone)
+        if (!value.startsWith('/')) return;
+
+        // Strip any existing /Solarscapes prefix so this is safe to run
+        // multiple times / on already-fixed markup without doubling up.
+        value = value.replace(new RegExp('^/' + repoName + '(?=/|$)'), '');
+
+        el.setAttribute(attr, basePath + value);
     }
-    
-    // Fix navbar brand link
-    const brand = root.querySelector('.navbar-brand');
-    if (brand) {
-        let href = brand.getAttribute('href');
-        href = href.replace(/^\/Solarscapes/, '');
-        brand.href = basePath + href;
-    }
-    
-    // Fix all dropdown links and nav links
-    root.querySelectorAll('.dropdown-item, .nav-link[href^="/"]').forEach(function(link) {
-        let href = link.getAttribute('href');
-        // Skip if it's just "#" or empty
-        if (!href || href === '#' || href.startsWith('#')) return;
-        
-        // Remove any existing /Solarscapes/ prefix
-        href = href.replace(/^\/Solarscapes/, '');
-        // Add correct base path
-        link.href = basePath + href;
+
+    root.querySelectorAll('[href^="/"]').forEach(function (el) {
+        rewrite(el, 'href');
+    });
+    root.querySelectorAll('[src^="/"]').forEach(function (el) {
+        rewrite(el, 'src');
     });
 }
 
@@ -112,34 +105,31 @@ $(document).ready(function () {
     // Detect environment for loading
     const isGitHubPages = window.location.hostname.includes('github.io');
     const repoName = 'Solarscapes';
-    
-    // Determine relative path for loading includes
-    // This detects if we're in a subfolder (pages/learning/, pages/main/, etc.)
-    const pathDepth = window.location.pathname.split('/').filter(p => p && p !== repoName).length;
-    const relativePath = pathDepth > 0 ? '../'.repeat(pathDepth) : './';
-    
-    const placeholder = document.getElementById('navbar-placeholder');
+    const basePath = isGitHubPages ? '/' + repoName : '';
 
-    // Load header
-    $('#navbar-placeholder').load(relativePath + 'includes/header.html', function (response, status, xhr) {
+    const navPlaceholder = document.getElementById('navbar-placeholder');
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+
+    // Load header — absolute path, resolves the same from any folder depth
+    $('#navbar-placeholder').load(basePath + '/includes/header.html', function (response, status, xhr) {
         if (status === 'error') {
             console.log('Error loading header: ' + xhr.status + ' ' + xhr.statusText);
             $('#navbar-placeholder').html('<div class="alert alert-danger m-3">Failed to load navigation. Please refresh the page.</div>');
             return;
         }
-        
-        // Initialize dropdowns
-        initDropdowns(placeholder);
-        
-        // ===== NEW: FIX ALL PATHS in the header =====
-        fixHeaderPaths(placeholder);
+
+        fixIncludePaths(navPlaceholder);
+        initDropdowns(navPlaceholder);
     });
 
-    // Load footer
-    $('#footer-placeholder').load(relativePath + 'includes/footer.html', function (response, status, xhr) {
+    // Load footer — same approach
+    $('#footer-placeholder').load(basePath + '/includes/footer.html', function (response, status, xhr) {
         if (status === 'error') {
             console.log('Error loading footer: ' + xhr.status + ' ' + xhr.statusText);
             $('#footer-placeholder').html('<div class="alert alert-danger m-3">Failed to load footer. Please refresh the page.</div>');
+            return;
         }
+
+        fixIncludePaths(footerPlaceholder);
     });
 });

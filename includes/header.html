@@ -1,25 +1,9 @@
 <!-- REUSABLE HEADER/NAVBAR COMPONENT -->
-<!-- Usage: Include this file in all pages for consistent navigation -->
-<!--
-  IMPORTANT: all links below use root-relative paths (starting with /)
-  instead of relative paths (../../, etc). This header is the same static
-  file loaded via $.load() from every page regardless of folder depth
-  (index.php at the root, pages/learning/*.html, pages/main/*.html, ...),
-  so relative paths would resolve differently depending on which page
-  loaded them. Root-relative paths resolve the same way everywhere.
-  If the site is not served from the domain root (e.g. it lives under
-  /solarscapes/), prefix every href/src below with that base path.
-
-  NOTE: dropdown toggles here use data-dropdown-toggle (custom attribute),
-  not data-bs-toggle="dropdown". Pages wire these up with the shared
-  initDropdowns() vanilla JS instead of relying on Bootstrap's
-  Dropdown/Popper JS, so this works no matter what else is going on with
-  Bootstrap loading, versions, or script order elsewhere on the page.
--->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
+        <!-- ✅ FIXED: Remove /Solarscapes/ from all paths -->
         <a class="navbar-brand d-flex align-items-center" href="/index.html">
-            <img src="/Solarscapes/assets/img/Logo.png" alt="Logo" class="logo">
+            <img src="/assets/img/Logo.png" alt="Logo" class="logo">
             <span class="ms-2">Solarscapes</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -54,7 +38,6 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/about.html">About Us</a></li>
             </ul>
-            
         </div>
     </div>
 </nav>
