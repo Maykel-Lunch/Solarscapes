@@ -1,3 +1,20 @@
+// Favicon — injected here since header.html loads into <body>, not <head>,
+// so a <link rel="icon"> placed in the partial itself wouldn't be honored.
+(function () {
+    const basePath = window.location.pathname.indexOf('/pages/') !== -1 ? '../../' : '';
+
+    const icon = document.createElement('link');
+    icon.rel = 'icon';
+    icon.type = 'image/png';
+    icon.href = basePath + 'assets/img/Logo.png';
+    document.head.appendChild(icon);
+
+    const appleIcon = document.createElement('link');
+    appleIcon.rel = 'apple-touch-icon';
+    appleIcon.href = basePath + 'assets/img/Logo.png';
+    document.head.appendChild(appleIcon);
+})();
+
 function initDropdowns(root) {
     const toggles = root.querySelectorAll('.nav-item.dropdown > .dropdown-toggle');
 
